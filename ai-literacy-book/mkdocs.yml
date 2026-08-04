@@ -1,6 +1,8 @@
 site_name: AI Literacy for CS UI
 site_description: Panduan integrasi AI dalam kelas pemrograman
 site_author: Iis Afriyanti
+site_url: https://iisafriyanti.github.io/ai-literacy/
+
 
 # 🎨 1. Mengaktifkan Tema Material Premium
 theme:
