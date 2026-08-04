@@ -1,1 +1,36 @@
-site_name: My Docs
+site_name: AI Literacy for CS UI
+site_description: Panduan integrasi AI dalam kelas pemrograman
+site_author: Iis Afriyanti
+
+# 🎨 1. Mengaktifkan Tema Material Premium
+theme:
+  name: material
+  language: id               # Mengubah teks sistem (seperti 'Next', 'Search') ke Bahasa Indonesia
+  palette:
+    # Mode Terang (Default)
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo        # Warna bar atas (Bisa diganti: blue, teal, deep purple, dll)
+      accent: indigo         # Warna tautan/tombol aktif
+      toggle:
+        icon: material/brightness-7
+        name: Ubah ke Mode Gelap
+    # Mode Gelap (Otomatis mendeteksi sistem user)
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Ubah ke Mode Terang
+  
+  # ✨ 2. Fitur Navigasi Tambahan Bawaan Tema
+  features:
+    - navigation.tabs        # Membuat menu bab horizontal di bagian atas
+    - navigation.sections    # Mengelompokkan sub-bab di bilah samping
+    - content.code.copy      # Menambahkan tombol otomatis untuk salin/copy kode coding
+
+# 🛠️ 3. Mengaktifkan Fitur Pendukung Markdown (Sangat berguna untuk materi coding)
+markdown_extensions:
+  - admonition               # Membuat kotak peringatan/tips berwarna (!!! info, !!! danger)
+  - pymdownx.superfences     # Mendukung pembuatan blok kode dan tab yang rapi
