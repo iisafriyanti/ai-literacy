@@ -1,38 +1,55 @@
-site_name: AI Literacy for CS UI
-site_description: Panduan integrasi AI dalam kelas pemrograman
+site_name: "Literasi AI: Memahami dan Menggunakan Kecerdasan Buatan"
+site_description: "Buku panduan literasi AI dan penggunaan praktis alat-alat AI untuk pemula hingga menengah"
 site_author: Iis Afriyanti
 site_url: https://iisafriyanti.github.io/ai-literacy/
 
-
-# 🎨 1. Mengaktifkan Tema Material Premium
 theme:
   name: material
-  language: id               # Mengubah teks sistem (seperti 'Next', 'Search') ke Bahasa Indonesia
+  language: id
   palette:
-    # Mode Terang (Default)
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo        # Warna bar atas (Bisa diganti: blue, teal, deep purple, dll)
-      accent: indigo         # Warna tautan/tombol aktif
+    - scheme: default
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-7
-        name: Ubah ke Mode Gelap
-    # Mode Gelap (Otomatis mendeteksi sistem user)
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
+        name: Ganti ke mode gelap
+    - scheme: slate
       primary: indigo
       accent: indigo
       toggle:
         icon: material/brightness-4
-        name: Ubah ke Mode Terang
-  
-  # ✨ 2. Fitur Navigasi Tambahan Bawaan Tema
+        name: Ganti ke mode terang
   features:
-    - navigation.tabs        # Membuat menu bab horizontal di bagian atas
-    - navigation.sections    # Mengelompokkan sub-bab di bilah samping
-    - content.code.copy      # Menambahkan tombol otomatis untuk salin/copy kode coding
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  icon:
+    logo: material/brain
 
-# 🛠️ 3. Mengaktifkan Fitur Pendukung Markdown (Sangat berguna untuk materi coding)
 markdown_extensions:
-  - admonition               # Membuat kotak peringatan/tips berwarna (!!! info, !!! danger)
-  - pymdownx.superfences     # Mendukung pembuatan blok kode dan tab yang rapi
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+  - tables
+
+nav:
+  - Beranda: index.md
+  - "Pengantar AI": pengantar-ai.md
+  - "Etika dan Penggunaan AI yang Bertanggung Jawab": bab6-etika-ai.md
+  - "Risiko dan Keterbatasan AI": bab7-risiko-keterbatasan.md
+  - Dampak: dampak-ai.md
+  - Panduan Penggunaan AI:
+      - "Panduan Praktis untuk DDP 1": panduan-praktis/panduan-praktis-ddp1.md
+      - "Panduan Praktis untuk PBP": panduan-praktis/panduan-praktis-pbp.md

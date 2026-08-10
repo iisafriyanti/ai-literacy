@@ -1,17 +1,49 @@
-# Welcome to MkDocs
+# Literasi AI: Memahami dan Menggunakan Kecerdasan Buatan
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Selamat datang di buku digital **Literasi AI**. Buku ini disusun untuk mahasiswa Fasilkom UI untuk memahami apa itu kecerdasan buatan (Artificial Intelligence/AI), bagaimana cara kerjanya secara sederhana, dan yang terpenting: **bagaimana menggunakannya secara praktis dan bertanggung jawab** dalam kehidupan sehari-hari.
 
-## Commands
+!!! info "Untuk siapa buku ini?"
+    Buku ini berusaha ditulis dengan bahasa yang mudah dipahami untuk mahasiswa Fakultas Ilmu Komputer Universitas Indonesia
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Mengapa Literasi AI Penting?
+AI sudah menjadi bagian dari kehidupan kita sehari-hari. Pelan-pelan AI mengubah cara kita mencari informasi, berinteraksi satu dengan yang lainnya, dan juga menjadi bagian dalam proses pendidikan. Kita dapat melakukan kreatifitas, menulis, membuat program dengan menggunakan AI. 
+Hal ini menjadi penting bagi kita untuk memahami apa itu AI dan bagaimana memanfaatkannya dengan bijak. Keberadaan AI saat ini menjadikan literasi AI begitu penting untuk dipahami. Semakin banyak perbincangan tentang literasi AI di berbagai forum, termasuk forum pendidikan.
 
-## Project layout
+## Apa Itu Literasi AI?
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+**Literasi AI** adalah fondasi penting dalam mmeahami AI. Literasi AI difokuskan pada pengetahuan, berpikir kritis, dan kesadaran etika terhadap penggunaan AI, bukan berfokus pada kemampuan teknis. Dengan memahami ini, sebagai pembelajar sadar akan dampak dan manfaat dari penggunaan AI. Secara umum, framework literasi AI dalam pendidikan mencakup beberapa hal:
+
+- Memahami apa itu AI dan jenis-jenisnya yang dapat dimanfaatkan bagi kalangan mahasiswa
+- Menggunakan AI secara lebih **efektif dan efisien** dalam pemrograman dan mengembangkan software khususnya adalah aplikasi _web_ dan _mobile_
+- Mengenali **batasan dan potensi risiko** seperti informasi yang salah (halusinasi AI) dan bias
+- Membuat keputusan yang ** bijak dan beretika** tentang kapan harus dan tidak harus mengandalkan AI
+- Mengevaluasi secara **kritis** hasil dari AI
+
+## Struktur Buku
+
+Buku ini terbagi menjadi dua bagian besar:
+
+### Bagian 1 - Pengetahuan tentang AI
+1. [Pengantar AI](pengantar-ai.md)
+2. [Etika dan Penggunaan AI yang Bertanggung Jawab](bab6-etika-ai.md)
+3. [Panduan Penggunaan AI]()
+4. [Risiko dan Keterbatasan AI](bab7-risiko-keterbatasan.md)
+5. [Dampak Penggunaan AI](dampak-ai)
+
+
+### Bagian 2 — Panduan Praktis Menggunakan AI
+- [Panduan untuk Mahasiswa DDP 1](panduan-praktis/panduan-praktis-ddp1.md)
+- [Panduan untuk Mahasiswa PBP](panduan-praktis/panduan-praktis-pbp.md)
+- [Panduan untuk Dosen Pemrograman](panduan-praktis/panduan-dosen-pemrograman.md)
+
+---
+
+!!! tip "Cara membaca buku ini"
+    Gunakan menu navigasi di sisi kiri (atau tab di bagian atas) untuk berpindah antar bab. Setiap bab dirancang agar dapat dibaca secara berdiri sendiri, namun disarankan membaca secara berurutan bagi pemula.
+
+## Referensi
+Empowering Learners for the Age of AI https://ailiteracyframework.org/
+AI literacy and competency: definitions, frameworks, development and future research directions
+
+*Draf ini masih dapat dikembangkan lebih lanjut — silakan tambahkan contoh kasus, gambar, atau studi kasus lokal sesuai kebutuhan pembaca Anda.*
+
