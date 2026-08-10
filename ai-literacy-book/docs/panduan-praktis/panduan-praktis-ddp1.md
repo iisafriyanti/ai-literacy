@@ -16,7 +16,7 @@ Meskipun terdapat batasan penggunaan AI pada tugas-tugas yang Anda kerjakan, tet
 - Google Colab
 
 ### Kritisi hasil dari AI
-- Anda dapat secara berkelompok ...
+- Anda dapat secara berkelompok mengkritisi hasil keluaran AI: apakah kode yang diberikan AI benar? Apakah ada pendekatan yang lebih sederhana? Apakah AI memberikan penjelasan yang akurat?
 
 ## Hal-hal yang perlu diperhatikan dalam penggunaan AI
 Anda harus sadar bahwa ada risiko dan kelemahan ketika terlalu bergantung pada AI untuk mendukung pembelajaran Anda. Ingat bahwa AI bukan manusia.
@@ -24,9 +24,14 @@ Anda harus sadar bahwa ada risiko dan kelemahan ketika terlalu bergantung pada A
 ### Cognitive Offloading
 Sudah banyak penelitian yang membuktikan bahwa kebergantungan pada generative AI dapat menurunkan kognitif Anda, menurunkan metakognitif, dan berpikir kritis. Jika Anda terlalu sering menggunakan AI untuk meringkas teks yang panjang, Anda akan kehilangan kemampuan berpikir kritis untuk menganalisis dokumen yang kompleks. Anda juga akhirnya tidak melatih otak Anda untuk memecahkan masalah atau mencari ide dengan kecerdasan Anda sendiri. Pada pemrograman, ketika Anda terlalu bergantung untuk mencari solusi kode, maka Anda akan melemahkan kemampuan Anda sendiri untuk menjadi pembelajar dan menjadi ahli di bidang yang ingin Anda kuasai. Belajar dengan kerja keras dan sungguh-sungguh tentu adalah pendekatan terbaik dibandingkan mencari jalan pintas dengan bergantung pada AI. 
 
-Penelitian tentang AI yang dapat menurunkan 
+Penelitian tentang AI yang dapat menurunkan kemampuan kognitif dan metakognitif terus berkembang. Sebagai mahasiswa pemrograman, penting untuk menemukan keseimbangan: gunakan AI untuk mempercepat pemahaman, bukan untuk menggantikan proses berpikir Anda sendiri.
+
 ### Bias dan Halusinasi
 
+AI dapat menghasilkan informasi yang terdengar meyakinkan tetapi sebenarnya salah (halusinasi). Dalam konteks pemrograman, AI dapat memberikan kode yang terlihat benar tetapi mengandung bug halus, menggunakan API yang sudah deprecated, atau menyarankan library yang tidak ada. Selalu verifikasi kode dari AI dengan menjalankannya dan memahami setiap baris.
+
+AI juga dapat mewarisi bias dari data pelatihannya. Bias ini dapat muncul dalam bentuk contoh kode yang tidak netral gender, saran desain yang bias terhadap kelompok tertentu, atau penjelasan konsep yang berpusat pada perspektif tertentu.
 
 ## Referensi
-https://information-services.ed.ac.uk/computing/comms-and-collab/elm/generative-ai-guidance-for-students/using-generative
+
+- University of Edinburgh. *Generative AI Guidance for Students*. <https://information-services.ed.ac.uk/computing/comms-and-collab/elm/generative-ai-guidance-for-students/using-generative-ai>

@@ -47,4 +47,4 @@ Setelah membaca buku ini, pembaca diharapkan mampu:
 
 ---
 
-**Lanjut ke:** [Bab 2 — Dasar-Dasar Kecerdasan Buatan](bab2-dasar-dasar-ai.md)
+**Lanjut ke:** [Bab 3 — Sejarah Singkat AI](bab3-sejarah-ai.md)

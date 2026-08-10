@@ -49,7 +49,7 @@ Prompt adalah pesan atau instruksi yang kita sampaikan kepada GenAI
 - Berikan prompt berupa pertanyaan atau instruksi yang jelas. Sebagai contoh, jika Anda ingin GenAI menuliskan cerita singkat, maka berikan prompt "Tuliskan cerita singkat tentang ...". Berikan prompt yang deskriptif dan rinci untuk memperbaiki output GenAI
 - Berikan instruksi untuk output yang diinginkan, seperti format yang diberikan apakah .json, .txt, apakah berupa paragraf atau esai panjang, tulis juga jika memiliki word count. Misal, jika Anda menginginkan GenAI menulis esai tentang Pulau Seribu dibatasi 1000 kata, maka berikan prompt "Buatkan esai tentang Pulau Seribu yang dibatasi hanya 1000kata"
 - Klarifikasi untuk target pembaca dari output yang dihasilkan GenAI
-- 
+- Iterasi — jika output pertama belum sesuai, berikan umpan balik untuk memperbaiki hasil
 
 ---
 

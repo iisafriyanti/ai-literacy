@@ -11,18 +11,21 @@ ai-literacy-book/
 └── docs/
     ├── index.md                 # Beranda
     ├── bab1-pengantar-literasi-ai.md
-    ├── bab2-dasar-dasar-ai.md
+    ├── pengantar-ai.md
     ├── bab3-sejarah-ai.md
     ├── bab4-jenis-jenis-ai.md
     ├── bab5-ai-dalam-kehidupan.md
-    ├── panduan-praktis/
-    │   ├── mengenal-chatbot-ai.md
-    │   ├── teknik-prompting.md
-    │   ├── ai-untuk-produktivitas.md
-    │   └── ai-untuk-kreativitas.md
     ├── bab6-etika-ai.md
     ├── bab7-risiko-keterbatasan.md
-    └── glosarium.md
+    ├── dampak-ai.md
+    └── panduan-praktis/
+        ├── mengenal-chatbot-ai.md
+        ├── teknik-prompting.md
+        ├── ai-untuk-produktivitas.md
+        ├── ai-untuk-kreativitas.md
+        ├── panduan-praktis-ddp1.md
+        ├── panduan-praktis-pbp.md
+        └── panduan-dosen-pemrograman.md
 ```
 
 ## Cara Menjalankan Secara Lokal
@@ -56,8 +59,9 @@ mkdocs build
 
 Hasil situs statis akan tersedia di folder `site/` untuk pratinjau (_preview_) lokal.
 
-> Note: Jangan masukkan hasil _build_ situs statis ke Git sebagai _commit_.
-> Cukup tulis dan sunting berkas Markdown di folder [`docs/`](./docs).
+> [!NOTE]
+> **Penting untuk Penulis**: Folder `site/` diabaikan oleh Git (`.gitignore`). Kamu **tidak perlu** mengunggah atau mem-commit folder `site/` ke GitHub. Cukup tulis dan sunting berkas Markdown di folder `docs/`, dan GitHub Actions akan secara otomatis membangun (*build*) serta memperbarui situs web setelah *pull request* di-merge.
+
 
 ## Deploy ke GitHub Pages (Otomatis)
 

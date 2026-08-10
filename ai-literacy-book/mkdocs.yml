@@ -50,10 +50,20 @@ markdown_extensions:
 
 nav:
   - Beranda: index.md
-  - "Pengantar AI": pengantar-ai.md
-  - "Etika dan Penggunaan AI yang Bertanggung Jawab": bab6-etika-ai.md
-  - "Risiko dan Keterbatasan AI": bab7-risiko-keterbatasan.md
-  - Dampak: dampak-ai.md
-  - Panduan Penggunaan AI:
-      - "Panduan Praktis untuk DDP 1": panduan-praktis/panduan-praktis-ddp1.md
-      - "Panduan Praktis untuk PBP": panduan-praktis/panduan-praktis-pbp.md
+  - "Pengetahuan tentang AI":
+      - "Pengantar Literasi AI": bab1-pengantar-literasi-ai.md
+      - "Artificial Intelligence": pengantar-ai.md
+      - "Sejarah Singkat AI": bab3-sejarah-ai.md
+      - "Jenis-Jenis AI": bab4-jenis-jenis-ai.md
+      - "AI dalam Kehidupan Sehari-hari": bab5-ai-dalam-kehidupan.md
+      - "Etika dan Penggunaan AI yang Bertanggung Jawab": bab6-etika-ai.md
+      - "Risiko dan Keterbatasan AI": bab7-risiko-keterbatasan.md
+      - "Dampak Penggunaan AI": dampak-ai.md
+  - "Panduan Praktis Menggunakan AI":
+      - "Mengenal Chatbot AI": panduan-praktis/mengenal-chatbot-ai.md
+      - "Teknik Prompting Dasar": panduan-praktis/teknik-prompting.md
+      - "AI untuk Produktivitas": panduan-praktis/ai-untuk-produktivitas.md
+      - "AI untuk Kreativitas": panduan-praktis/ai-untuk-kreativitas.md
+      - "Panduan Praktis untuk Mahasiswa DDP 1": panduan-praktis/panduan-praktis-ddp1.md
+      - "Panduan Praktis untuk Mahasiswa PBP": panduan-praktis/panduan-praktis-pbp.md
+      - "Panduan untuk Dosen Pemrograman": panduan-praktis/panduan-dosen-pemrograman.md

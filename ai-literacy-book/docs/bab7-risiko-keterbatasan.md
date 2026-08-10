@@ -49,4 +49,4 @@ Melatih dan menjalankan model AI berskala besar membutuhkan daya komputasi dan e
 
 ---
 
-**Lanjut ke:** [Glosarium Istilah AI](glosarium.md)
+**Lanjut ke:** [Glosarium Istilah AI](pengantar-ai.md)
