@@ -32,6 +32,7 @@ theme:
     logo: material/brain
 
 plugins:
+  - search
   - git-authors
   - git-revision-date-localized
 
