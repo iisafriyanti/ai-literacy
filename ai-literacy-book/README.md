@@ -36,10 +36,10 @@ ai-literacy-book/
    ```
 2. Aktifkan _virtual environment_ sesuai sistem operasi yang digunakan:
    ```shell
-   # Mac OS, Linux
+   # macOS / Linux
    source .venv/bin/activate
-   # Windows
-   .venv/bin/activate
+   # Windows (PowerShell)
+   .venv\Scripts\Activate.ps1
    ```
 3. Instal dependensi:
    ```bash
