@@ -12,5 +12,7 @@ When authoring course materials, please consult the following references to ensu
 
 - [MkDocs](https://www.mkdocs.org/) - Context7 library ID: `/websites/mkdocs`
   - The main documentation publishing system used in the course.
+- [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) - Context7 library ID: `/websites/squidfunk_github_io_mkdocs-material`
+  - The open-source theme used throughout in the publishing system.
 - [Diataxis/Diátaxis](https://diataxis.fr/) - Context7 library ID: `/websites/diataxis_fr`
   - The writing methodology and practices used when authoring course materials.
