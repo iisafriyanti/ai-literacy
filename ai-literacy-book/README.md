@@ -27,15 +27,26 @@ ai-literacy-book/
 
 ## Cara Menjalankan Secara Lokal
 
-1. Instal dependensi:
+1. Buat _virtual environment_ Python:
+   ```shell
+   python -m venv .venv
+   ```
+2. Aktifkan _virtual environment_ sesuai sistem operasi yang digunakan:
+   ```shell
+   # Mac OS, Linux
+   source .venv/bin/activate
+   # Windows
+   .venv/bin/activate
+   ```
+3. Instal dependensi:
    ```bash
    pip install -r requirements.txt
    ```
-2. Jalankan server pengembangan:
+4. Jalankan server pengembangan:
    ```bash
    mkdocs serve
    ```
-3. Buka `http://127.0.0.1:8000` di peramban.
+5. Buka `http://127.0.0.1:8000` di peramban.
 
 ## Cara Build Situs Statis
 
