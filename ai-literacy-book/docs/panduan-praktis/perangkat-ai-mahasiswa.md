@@ -1,30 +1,48 @@
 # Panduan Tools AI
 
-Panduan ini bertujuan untuk memberikan contoh penggunaan _tools_ AI dalam kegiatan pembelajaran di program studi Ilmu Komputer, Sistem Informasi, dan Kecerdasan Artifisial.
+Panduan ini bertujuan untuk memberikan contoh penggunaan *tools* AI dalam kegiatan pembelajaran di program studi Ilmu Komputer, Sistem Informasi, dan Kecerdasan Artifisial Fakultas Ilmu Komputer Universitas Indonesia.
 
 > **Catatan Konsep**: Untuk penjelasan konseptual mengenai dasar-dasar LLM, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
 
-## Sycophancy / "Yes Bos"
+## 1. Menghindari Sycophancy & Menggunakan Role Prompting
 
-Penyedia layanan _generative_ AI seperti OpenAI dan Anthropic telah melatih LLM mereka agar dapat berperan sebagai asisten yang berusaha menolong sebaik mungkin penggunanya. Peran tersebut menjadi _default_ yang dipakai oleh pengguna _tools_ yang diharapkan sudah mencakup mayoritas kebutuhan penggunanya.
+### 1.1 Sycophancy / "Yes Man"
 
-Ada kemungkinan peran _default_ tidak sesuai dengan konteks kebutuhan pengguna _tools_ AI. Jika mengambil contoh peran AI yang diatur supaya menjadi asisten yang baik, ada kemungkinan asisten tersebut merespon perintah pengguna dengan bahasa yang sangat positif, bahkan bisa menutupi hal negatif yang sebenarnya sudah diidentifikasi oleh asisten. Hal ini umum disebut sebagai _sycophancy_.
+Penyedia layanan *generative* AI seperti OpenAI dan Anthropic telah melatih LLM mereka agar dapat berperan sebagai asisten yang berusaha menolong sebaik mungkin penggunanya. Peran tersebut menjadi *default* yang dipakai oleh pengguna *tools* yang diharapkan sudah mencakup mayoritas kebutuhan penggunanya.
 
-> Braindump on
+Namun, peran *default* tersebut berpotensi tidak sesuai dengan konteks kebutuhan pembelajaran Anda. Sebagai asisten yang "selalu ingin menyenangkan pengguna", AI memiliki kecenderungan untuk merespon perintah dengan bahasa yang sangat positif, menyetujui pendapat pengguna meskipun salah, bahkan menutupi kekurangan atau kesalahan sintaksis yang sebenarnya sudah teridentifikasi. Fenomena ini umum disebut sebagai **sycophancy** (perilaku *yes-man*).
 
-Dalam kasus AI yang sangat membantu, bisa jadi AI langsung mengerjakan instruksi yang diberikan tanpa memikirkan kembali konteks dibalik instruksi tersebut. Misalnya seorang mahasiswa meminta AI untuk membantunya menulis sebuah fungsi _sort_ koleksi elemen integer sebagai bagian dari sebuah tugas pemrograman. Dengan konfigurasi AI default yang cenderung _sycophant_, maka AI akan menyanggupi permintaan si mahasiswa dan membuatkan kodenya. Hal ini menyebabkan pengguna tidak belajar.
+Dalam kasus pengerjaan tugas, AI yang terlalu penurut akan langsung mengeksekusi instruksi yang diberikan tanpa memikirkan konteks edukatif di baliknya. Misalnya, ketika Anda meminta AI untuk membuatkan fungsi pengurutan (*sort*) elemen integer sebagai bagian dari tugas praktikum pemrograman, AI dengan konfigurasi *default* yang *sycophantic* akan langsung memberikan kode solusi lengkap. Hal ini menyebabkan Anda kehilangan proses berpikir kritis dan tidak melatih logika pemecahan masalah secara mandiri (*cognitive offloading*).
 
-> Braindump off
+### 1.2 Role Prompting
 
-## Role Prompting
+Setelah memahami isu *sycophancy* dan tendensi AI untuk terlalu "membantu", Anda perlu menginstruksikan AI agar berperan lebih tepat guna sebagai mitra belajar. Anda dapat mengatur "sifat" *default* AI dengan memberikan instruksi khusus yang menetapkan peran tertentu, atau dikenal sebagai **role prompt**.
 
-Setelah mengetahui isu mengenai _sycophancy_ dan tendensi AI untuk terlalu "membantu" penggunanya, Anda perlu mampu menginstruksikan AI agar lebih tepat guna dalam membantu Anda dalam belajar. Mengingat Anda akan sering berinteraksi dengan AI, maka Anda perlu mengatur "sifat" _default_ AI yang digunakan. Hal ini dapat dicapai dengan cara membuat instruksi bagi AI agar berperan sesuai instruksi yang diinginkan, atau dikenal sebagai _role prompt_.
+### 1.3 Contoh Role Prompt: Burhan (Asdos PBP)
 
-### Contoh: Burhan (Asdos)
-
-Berikut ini adalah salah satu contoh _role prompt_ yang dikembangkan untuk mata kuliah "Pemrograman Berbasiskan Platform" (PBP):
+Berikut ini adalah salah satu contoh *role prompt* yang dikembangkan untuk mata kuliah **Pemrograman Berbasiskan Platform (PBP)** di Fasilkom UI. Prompt ini dirancang khusus agar AI bertindak sebagai asisten dosen yang membimbing dengan metode Sokratis:
 
 ```markdown
+<!-- Berikut ini adalah komentar yang menjelaskan contoh role prompt.
+     Jika ingin mencoba role prompt, silakan hapus komentarnya terlebih dahulu.
+
+  =============================================================================
+  ROLE PROMPT: Burhan (Asisten Dosen Kuliah PBP)
+  =============================================================================
+  - Persona Asdos: Mengambil peran sebagai Burhan, asisten dosen PBP Fasilkom UI.
+  - Bahasa Prompt: Prompt ditulis dalam Bahasa Inggris agar mencapai kepatuhan 
+    instruksi (*instruction-following*) tertinggi pada frontier LLM, namun AI 
+    diinstruksikan merespons sesuai bahasa masukan mahasiswa (Indonesia/Inggris).
+  - Metode Sokratis: Melarang AI memberikan solusi kode langsung; mewajibkan 
+    pertanyaan pemandu dan pembimbingan langkah demi langkah.
+  - Dokumentasi Terpercaya: Menyertakan tautan langsung ke dokumentasi resmi 
+    (MDN, Flutter Docs, OWASP) agar AI yang memiliki fitur web browsing dapat 
+    merujuk ke sumber terverifikasi.
+  - Context7 / MCP: Penggunaan Context7 library ID memungkinkan AI mengakses 
+    indeks dokumentasi teknis via Model Context Protocol (MCP).
+  =============================================================================
+-->
+
 Act as Burhan, a friendly yet academically rigorous teaching assistant (TA) for "Platform-Based Programming" (PBP) course at the Faculty of Computer Science, Universitas Indonesia.
 PBP is a course where students learn to build Web and mobile apps following solid foundational knowledge and best practices delivered by the lecturers.
 
@@ -60,46 +78,37 @@ Ground your responses to the following resources used in the course:
 - [Tailwind CSS](https://tailwindcss.com/docs) - Context7 library ID: `/tailwindlabs/tailwindcss.com`
 ```
 
-> Braindump on
+!!! note "Mengenal Context7 & MCP"
+    **Context7** adalah layanan *indexing* dokumentasi teknis yang memungkinkan LLM mengambil cuplikan dokumentasi dan contoh kode resmi melalui protokol **Model Context Protocol (MCP)**. Fitur ini memastikan AI merujuk pada versi dokumentasi yang tepat dan mengurangi risiko halusinasi.
 
-Penjelasan mengenai contoh _role prompt_ di atas:
+### 1.4 Memasang Role Prompt pada Web Chat Assistant
 
-1. _Prompt_ menginstruksikan AI untuk mengambil peran sebagai asisten dosen bernama Burhan.
-2. _Prompt_ ditulis dalam bahasa Inggris. Pertimbangannya adalah karena _frontier models_ (model-model LLM terkini) banyak dilatih menggunakan korpus (koleksi dokumen teks) berbahasa Inggris. Sehingga untuk membuat pemahaman terhadap instruksinya lebih baik, bahasa di prompt disesuaikan ke bahasa mayoritas. Akan tetapi, berdasarkan beberapa anekdot dari kolega, LLM saat ini cukup pintar menerima instruksi dalam bahasa Indonesia.
-3. Kunci utama pada _prompt_ peran asisten dosen di atas adalah _framing_ kepada AI agar mengikuti metode Sokratis, yaitu metode pengajaran yang mengajak lawan bicara untuk menjawab pertanyaan-pertanyaan. Tujuannya agar AI tidak mengembalikan langsung solusi kepada pengguna (dalam hal ini, mahasiswa).
-4. _Prompt_ berisi beberapa tautan ke sumber daring agar bisa dicek oleh AI. Beberapa _tools_ bisa melakukan _browsing_ ke Internet untuk membaca laman web.
-5. Ada satu _tools_ di dalam _prompt_ yaitu Context7. Context7 butuh dibahas terpisah. Namun intinya, Context7 adalah layanan indexing dokumen yang bisa diakses menggunakan bantuan AI via MCP.
+Layanan *web chat* AI seperti ChatGPT dan Google Gemini menyediakan fitur *custom instructions* (instruksi kustom) yang memungkinkan Anda menetapkan *role prompt* secara permanen — artinya instruksi tersebut akan otomatis disisipkan ke setiap percakapan baru tanpa harus Anda ketik ulang setiap kali.
 
-> Braindump off
+Berikut langkah-langkah memasang *role prompt* pada ChatGPT (antarmuka web):
 
-### Memasang Role Prompt pada Web Chat Assistant
-
-Layanan _web chat_ AI seperti ChatGPT dan Google Gemini menyediakan fitur _custom instructions_ (instruksi kustom) yang memungkinkan Anda menetapkan _role prompt_ secara permanen — artinya instruksi tersebut akan otomatis disisipkan ke setiap percakapan baru tanpa harus Anda ketik ulang setiap kali.
-
-Berikut langkah-langkah memasang _role prompt_ pada ChatGPT (antarmuka web):
-
-1. **Buka Pengaturan _Custom Instructions_**: Klik ikon profil Anda pada sidebar kiri, kemudian pilih **Customize ChatGPT** (atau navigasi melalui **Settings → Personalization → Custom Instructions**).
+1. **Buka Pengaturan *Custom Instructions***: Klik ikon profil Anda pada sidebar kiri, kemudian pilih **Customize ChatGPT** (atau navigasi melalui **Settings → Personalization → Custom Instructions**).
 2. **Isi Kolom "What would you like ChatGPT to know about you?"**: Tuliskan informasi konteks tentang diri Anda yang relevan untuk pembelajaran.
    * *Contoh*: "Saya mahasiswa Ilmu Komputer Universitas Indonesia yang sedang mengambil mata kuliah DDP 1. Saya sedang belajar fundamental pemrograman dan ingin memahami konsep, bukan hanya mendapatkan jawaban jadi."
-3. **Isi Kolom "How would you like ChatGPT to respond?"**: Tuliskan _role prompt_ yang mendefinisikan perilaku AI yang Anda inginkan.
-   * *Contoh*: "Bertindaklah sebagai asisten dosen (asdos) yang berdedikasi. Jika saya meminta solusi langsung untuk tugas pemrograman, tolak dan arahkan saya untuk berpikir tahap demi tahkah. Berikan pertanyaan pemandu, bukan jawaban final. Gunakan Bahasa Indonesia."
-4. **Simpan dan Aktifkan**: Klik tombol **Save**. Pastikan _toggle_ _Custom Instructions_ dalam keadaan aktif (ON). _Role prompt_ kini akan diterapkan pada setiap percakapan baru.
+3. **Isi Kolom "How would you like ChatGPT to respond?"**: Tuliskan *role prompt* yang mendefinisikan perilaku AI yang Anda inginkan.
+   * *Contoh*: "Bertindaklah sebagai asisten dosen (asdos) yang berdedikasi. Jika saya meminta solusi langsung untuk tugas pemrograman, tolak dan arahkan saya untuk berpikir tahap demi tahap. Berikan pertanyaan pemandu, bukan jawaban final. Gunakan Bahasa Indonesia."
+4. **Simpan dan Aktifkan**: Klik tombol **Save**. Pastikan *toggle* *Custom Instructions* dalam keadaan aktif (ON). *Role prompt* kini akan diterapkan pada setiap percakapan baru.
 
 !!! tip "Satu Set Aktif pada Satu Waktu"
-    ChatGPT hanya mendukung satu set _custom instructions_ yang aktif pada satu waktu. Jika Anda mengganti peran (misalnya dari "asisten dosen" ke "partner _code review_"), Anda perlu menimpa isi kolom yang ada. Simpan _role prompt_ Anda di berkas terpisah (misalnya di _notes_ atau _markdown_) agar mudah dipasang ulang saat dibutuhkan.
+    ChatGPT hanya mendukung satu set *custom instructions* yang aktif pada satu waktu. Jika Anda mengganti peran (misalnya dari "asisten dosen" ke "partner *code review*"), Anda perlu menimpa isi kolom yang ada. Simpan *role prompt* Anda di berkas terpisah (misalnya di *notes* atau *markdown*) agar mudah dipasang ulang saat dibutuhkan.
 
 !!! warning "Batas Karakter"
-    Setiap kolom _custom instructions_ memiliki batas sekitar 1.500 karakter. Tuliskan instruksi secara ringkas dan padat — setiap kalimat harus memberikan dampak yang jelas pada perilaku AI.
+    Setiap kolom *custom instructions* memiliki batas sekitar 1.500 karakter. Tuliskan instruksi secara ringkas dan padat — setiap kalimat harus memberikan dampak yang jelas pada perilaku AI.
 
 > **Catatan platform lain**: Google Gemini menyediakan fitur serupa melalui **Gemini Apps → Settings → System instructions** (tersedia pada versi tertentu). Antarmuka mungkin berbeda, tetapi prinsipnya sama: Anda menuliskan instruksi peran yang akan disisipkan ke setiap percakapan baru.
 
-### Memasang Role Prompt pada Copilot di IDE / Text Editor
+### 1.5 Memasang Role Prompt pada Copilot di IDE / Text Editor
 
-Berbeda dengan _web chat_ yang hanya mengenal satu set _custom instructions_ aktif, IDE seperti VS Code dan JetBrains mendukung pemasangan _role prompt_ pada Copilot melalui berkas instruksi yang diletakkan di repositori proyek. Pendekatan ini memberi keuntungan: _role prompt_ ikut ter-_track_ di Git, sehingga seluruh tim dapat berbagi konfigurasi peran yang konsisten.
+Berbeda dengan *web chat* yang hanya mengenal satu set *custom instructions* aktif, IDE seperti VS Code dan JetBrains mendukung pemasangan *role prompt* pada Copilot melalui berkas instruksi yang diletakkan di repositori proyek. Pendekatan ini memberi keuntungan: *role prompt* ikut ter-*track* di Git, sehingga seluruh tim dapat berbagi konfigurasi peran yang konsisten.
 
 #### VS Code (GitHub Copilot)
 
-1. **Buat Berkas Instruksi**: Di _root_ (akar) repositori proyek Anda, buat direktori `.github` (jika belum ada), kemudian buat berkas bernama `copilot-instructions.md`.
+1. **Buat Berkas Instruksi**: Di *root* (akar) repositori proyek Anda, buat direktori `.github` (jika belum ada), kemudian buat berkas bernama `copilot-instructions.md`.
    ```
    .github/copilot-instructions.md
    ```
@@ -115,21 +124,21 @@ Berbeda dengan _web chat_ yang hanya mengenal satu set _custom instructions_ akt
    - Jika mahasiswa menempel soal tugas secara verbatim, tolak dan arahkan
      untuk mendiskusikan pendekatan algoritmik terlebih dahulu.
    ```
-3. **Aktifkan Penggunaan Berkas Instruksi**: Buka VS Code Settings (`Ctrl+,` / `Cmd+,`), cari **"GitHub > Copilot > Chat > Code Generation: Use Instruction Files"**, dan pastikan opsi tersebut aktif (centang). VS Code akan otomatis mendeteksi berkas `copilot-instructions.md` di _root_ _workspace_ dan menyisipkannya ke setiap permintaan Copilot Chat.
-4. **Verifikasi**: Buka panel Copilot Chat (`Ctrl+Shift+I` / `Cmd+Shift+I`), lalu ajukan pertanyaan uji. Periksa apakah respons Copilot sudah sesuai dengan _role prompt_ yang Anda tulis.
+3. **Aktifkan Penggunaan Berkas Instruksi**: Buka VS Code Settings (`Ctrl+,` / `Cmd+,`), cari **"GitHub > Copilot > Chat > Code Generation: Use Instruction Files"**, dan pastikan opsi tersebut aktif (centang). VS Code akan otomatis mendeteksi berkas `copilot-instructions.md` di *root* *workspace* dan menyisipkannya ke setiap permintaan Copilot Chat.
+4. **Verifikasi**: Buka panel Copilot Chat (`Ctrl+Shift+I` / `Cmd+Shift+I`), lalu ajukan pertanyaan uji. Periksa apakah respons Copilot sudah sesuai dengan *role prompt* yang Anda tulis.
 
 !!! tip "Instruksi per-Fitur"
-    VS Code juga mendukung instruksi yang lebih spesifik per fitur Copilot melalui _workspace settings_ (`settings.json`). Misalnya, Anda dapat menambahkan `github.copilot.chat.codeGeneration.instructions` untuk mengatur gaya _code generation_, atau `github.copilot.chat.commitMessageGeneration.instructions` untuk mengatur gaya pesan _commit_. Fitur ini berguna ketika _role prompt_ umum di `copilot-instructions.md` belum cukup spesifik.
+    VS Code juga mendukung instruksi yang lebih spesifik per fitur Copilot melalui *workspace settings* (`settings.json`). Misalnya, Anda dapat menambahkan `github.copilot.chat.codeGeneration.instructions` untuk mengatur gaya *code generation*, atau `github.copilot.chat.commitMessageGeneration.instructions` untuk mengatur gaya pesan *commit*. Fitur ini berguna ketika *role prompt* umum di `copilot-instructions.md` belum cukup spesifik.
 
 !!! info "AGENTS.md"
-    VS Code juga mendukung berkas `AGENTS.md` yang berfungsi serupa dengan `copilot-instructions.md` — instruksi di dalamnya akan diterapkan ke semua permintaan Copilot di _workspace_. Berkas ini juga kompatibel dengan beberapa _autonomous coding agent_ lain, sehingga berguna jika Anda menggunakan lebih dari satu _tool_ AI di repositori yang sama.
+    VS Code juga mendukung berkas `AGENTS.md` yang berfungsi serupa dengan `copilot-instructions.md` — instruksi di dalamnya akan diterapkan ke semua permintaan Copilot di *workspace*. Berkas ini juga kompatibel dengan beberapa *autonomous coding agent* lain, sehingga berguna jika Anda menggunakan lebih dari satu *tool* AI di repositori yang sama.
 
 #### JetBrains (IntelliJ IDEA, PyCharm, WebStorm, dll.)
 
-1. **Buka Pengaturan Copilot**: Klik menu **File → Settings** (Windows/Linux) atau nama aplikasi pada _menu bar_ → **Settings** (macOS).
+1. **Buka Pengaturan Copilot**: Klik menu **File → Settings** (Windows/Linux) atau nama aplikasi pada *menu bar* → **Settings** (macOS).
 2. **Navigasi ke Custom Instructions**: Pada sidebar kiri, buka **Tools → GitHub Copilot → Customizations** (atau **Edit Settings** pada beberapa versi).
 3. **Pilih Lingkup Instruksi**:
-   - **Workspace**: Instruksi berlaku hanya untuk proyek ini. Berkas akan disimpan sebagai `.github/copilot-instructions.md` di _root_ repositori.
+   - **Workspace**: Instruksi berlaku hanya untuk proyek ini. Berkas akan disimpan sebagai `.github/copilot-instructions.md` di *root* repositori.
    - **Global**: Instruksi berlaku untuk semua proyek. Berkas disimpan di direktori konfigurasi pengguna:
      - macOS: `~/.config/github-copilot/intellij/global-copilot-instructions.md`
      - Windows: `%LOCALAPPDATA%\github-copilot\intellij\global-copilot-instructions.md`
@@ -137,9 +146,11 @@ Berbeda dengan _web chat_ yang hanya mengenal satu set _custom instructions_ akt
 5. **Simpan**: Klik **Apply** / **OK**. Instruksi akan otomatis disisipkan ke Copilot Chat pada IDE.
 
 !!! warning "Periksa Versi Ekstensi"
-    Fitur _custom instructions_ pada JetBrains memerlukan ekstensi GitHub Copilot versi terkini. Jika opsi tidak muncul, perbarui ekstensi melalui **Settings → Plugins → GitHub Copilot → Update**.
+    Fitur *custom instructions* pada JetBrains memerlukan ekstensi GitHub Copilot versi terkini. Jika opsi tidak muncul, perbarui ekstensi melalui **Settings → Plugins → GitHub Copilot → Update**.
 
-## 1. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
+---
+
+## 2. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
 
 Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjutan atau konsep *multi-threading*), Anda dapat memanfaatkan antarmuka percakapan web (seperti ChatGPT atau Google Gemini) sebagai mitra diskusi.
 
@@ -150,7 +161,9 @@ Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjut
 3. **Minta Penjelasan Bertahap**: Jika jawaban pertama terlalu umum, berikan instruksi lanjutan untuk memperdalam bagian tertentu.
 4. **Verifikasi Mandiri**: Cocokkan poin penjelasan dari AI dengan slide materi perkuliahan Fasilkom UI atau buku teks resmi sebelum menggunakannya dalam pemahaman Anda.
 
-## 2. Menulis & Debugging Kode di Editor (Menggunakan IDE Copilot)
+---
+
+## 3. Menulis & Debugging Kode di Editor (Menggunakan IDE Copilot)
 
 Untuk mempercepat penulisan kode rutin dan menyelesaikan error saat pengerjaan tugas pemrograman di editor (seperti VS Code atau JetBrains), manfaatkan *IDE Embedded Copilot* (seperti GitHub Copilot atau Cursor).
 
@@ -163,7 +176,9 @@ Untuk mempercepat penulisan kode rutin dan menyelesaikan error saat pengerjaan t
    * Buka panel *IDE Chat* dan minta penjelasan penyebab error beserta saran perbaikannya.
 4. **Jalankan Pengujian Lokal**: Selalu jalankan *unit test* atau tes manual di lingkungan lokal Anda setelah menerima perbaikan kode.
 
-## 3. Mengelola & Refactoring Proyek Multi-Berkas (Menggunakan Autonomous Coding Agent)
+---
+
+## 4. Mengelola & Refactoring Proyek Multi-Berkas (Menggunakan Autonomous Coding Agent)
 
 Saat mengerjakan proyek skala menengah hingga besar yang melibatkan banyak berkas (seperti proyek kelompok PBP atau APS), Anda dapat menggunakan *Autonomous Coding Agent* (seperti Claude Code atau Google Antigravity) yang berjalan di lingkungan terminal/workspace.
 
@@ -179,7 +194,7 @@ Saat mengerjakan proyek skala menengah hingga besar yang melibatkan banyak berka
 
 ---
 
-## 4. Menyusun Transparansi & Refleksi Penggunaan AI
+## 5. Menyusun Transparansi & Refleksi Penggunaan AI
 
 Penggunaan AI dalam pengerjaan tugas di Fasilkom UI wajib disertai dengan transparansi dan refleksi proses berpikir.
 
@@ -188,7 +203,9 @@ Penggunaan AI dalam pengerjaan tugas di Fasilkom UI wajib disertai dengan transp
 2. **Identifikasi Proses Verifikasi**: Tuliskan minimal 2-3 poin mengenai apa yang Anda periksa, kritisi, atau perbaiki dari keluaran AI tersebut secara mandiri.
 3. **Lampirkan Pernyataan Refleksi**: Tambahkan bagian *Acknowledgement / Refleksi Penggunaan AI* pada berkas `README.md` repositori tugas atau laporan sesuai dengan ketentuan mata kuliah (lihat [Panduan Praktis DDP 1](panduan-praktis-ddp1.md) dan [Panduan Praktis PBP](panduan-praktis-pbp.md)).
 
-## 5. Referensi Dokumen Terkait
+---
+
+## 6. Referensi Dokumen Terkait
 
 * [Mengenal Chatbot AI](mengenal-chatbot-ai.md) — Konsep dasar LLM, antarmuka percakapan, dan penanganan halusinasi.
 * [Teknik Prompting Dasar](teknik-prompting.md) — Kerangka penyusunan prompt terstruktur (T-K-F-N).
