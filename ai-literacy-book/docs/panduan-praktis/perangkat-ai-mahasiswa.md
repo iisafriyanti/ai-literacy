@@ -24,6 +24,27 @@ Setelah mengetahui isu mengenai _sycophancy_ dan tendensi AI untuk terlalu "memb
 
 TBD.
 
+### Memasang Role Prompt pada Web Chat Assistant
+
+Layanan _web chat_ AI seperti ChatGPT dan Google Gemini menyediakan fitur _custom instructions_ (instruksi kustom) yang memungkinkan Anda menetapkan _role prompt_ secara permanen — artinya instruksi tersebut akan otomatis disisipkan ke setiap percakapan baru tanpa harus Anda ketik ulang setiap kali.
+
+Berikut langkah-langkah memasang _role prompt_ pada ChatGPT (antarmuka web):
+
+1. **Buka Pengaturan _Custom Instructions_**: Klik ikon profil Anda pada sidebar kiri, kemudian pilih **Customize ChatGPT** (atau navigasi melalui **Settings → Personalization → Custom Instructions**).
+2. **Isi Kolom "What would you like ChatGPT to know about you?"**: Tuliskan informasi konteks tentang diri Anda yang relevan untuk pembelajaran.
+   * *Contoh*: "Saya mahasiswa Ilmu Komputer Universitas Indonesia yang sedang mengambil mata kuliah DDP 1. Saya sedang belajar fundamental pemrograman dan ingin memahami konsep, bukan hanya mendapatkan jawaban jadi."
+3. **Isi Kolom "How would you like ChatGPT to respond?"**: Tuliskan _role prompt_ yang mendefinisikan perilaku AI yang Anda inginkan.
+   * *Contoh*: "Bertindaklah sebagai asisten dosen (asdos) yang berdedikasi. Jika saya meminta solusi langsung untuk tugas pemrograman, tolak dan arahkan saya untuk berpikir tahap demi tahkah. Berikan pertanyaan pemandu, bukan jawaban final. Gunakan Bahasa Indonesia."
+4. **Simpan dan Aktifkan**: Klik tombol **Save**. Pastikan _toggle_ _Custom Instructions_ dalam keadaan aktif (ON). _Role prompt_ kini akan diterapkan pada setiap percakapan baru.
+
+!!! tip "Satu Set Aktif pada Satu Waktu"
+    ChatGPT hanya mendukung satu set _custom instructions_ yang aktif pada satu waktu. Jika Anda mengganti peran (misalnya dari "asisten dosen" ke "partner _code review_"), Anda perlu menimpa isi kolom yang ada. Simpan _role prompt_ Anda di berkas terpisah (misalnya di _notes_ atau _markdown_) agar mudah dipasang ulang saat dibutuhkan.
+
+!!! warning "Batas Karakter"
+    Setiap kolom _custom instructions_ memiliki batas sekitar 1.500 karakter. Tuliskan instruksi secara ringkas dan padat — setiap kalimat harus memberikan dampak yang jelas pada perilaku AI.
+
+> **Catatan platform lain**: Google Gemini menyediakan fitur serupa melalui **Gemini Apps → Settings → System instructions** (tersedia pada versi tertentu). Antarmuka mungkin berbeda, tetapi prinsipnya sama: Anda menuliskan instruksi peran yang akan disisipkan ke setiap percakapan baru.
+
 ## 1. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
 
 Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjutan atau konsep *multi-threading*), Anda dapat memanfaatkan antarmuka percakapan web (seperti ChatGPT atau Google Gemini) sebagai mitra diskusi.
