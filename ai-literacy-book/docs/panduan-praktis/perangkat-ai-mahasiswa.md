@@ -1,12 +1,20 @@
 # Panduan Tools AI
 
-Sebagai mahasiswa tingkat kedua (tahun kedua) di Fakultas Ilmu Komputer Universitas Indonesia (Fasilkom UI), Anda berhadapan dengan alur pengerjaan praktikum dan proyek yang makin kompleks pada mata kuliah seperti Struktur Data & Algoritma (SDA), Pemrograman Berbasis Platform (PBP), Sistem Basis Data (Basdat), dan Analisis & Perancangan Sistem (APS).
-
-Panduan praktis ini berfokus pada **langkah-langkah praktis pemanfaatan perangkat AI** (*how-to guide*) sesuai dengan tugas perkuliahan Anda.
+Panduan ini bertujuan untuk memberikan contoh penggunaan _tools_ AI dalam kegiatan pembelajaran di program studi Ilmu Komputer, Sistem Informasi, dan Kecerdasan Artifisial.
 
 > **Catatan Konsep**: Untuk penjelasan konseptual mengenai dasar-dasar LLM, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
 
----
+## Sycophancy / "Yes Bos"
+
+Penyedia layanan _generative_ AI seperti OpenAI dan Anthropic telah melatih LLM mereka agar dapat berperan sebagai asisten yang berusaha menolong sebaik mungkin penggunanya. Peran tersebut menjadi _default_ yang dipakai oleh pengguna _tools_ yang diharapkan sudah mencakup mayoritas kebutuhan penggunanya.
+
+Ada kemungkinan peran _default_ tidak sesuai dengan konteks kebutuhan pengguna _tools_ AI. Jika mengambil contoh peran AI yang diatur supaya menjadi asisten yang baik, ada kemungkinan asisten tersebut merespon perintah pengguna dengan bahasa yang sangat positif, bahkan bisa menutupi hal negatif yang sebenarnya sudah diidentifikasi oleh asisten. Hal ini umum disebut sebagai _sycophancy_.
+
+> Braindump on
+
+Dalam kasus AI yang sangat membantu, bisa jadi AI langsung mengerjakan instruksi yang diberikan tanpa memikirkan kembali konteks dibalik instruksi tersebut. Misalnya seorang mahasiswa meminta AI untuk membantunya menulis sebuah fungsi _sort_ koleksi elemen integer sebagai bagian dari sebuah tugas pemrograman. Dengan konfigurasi AI default yang cenderung _sycophant_, maka AI akan menyanggupi permintaan si mahasiswa dan membuatkan kodenya. Hal ini menyebabkan pengguna tidak belajar.
+
+> Braindump off
 
 ## 1. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
 
@@ -18,8 +26,6 @@ Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjut
    * *Contoh*: "Saya sedang mempelajari perbedaan algoritma pencarian BFS dan DFS pada mata kuliah SDA. Berikan penjelasan perbandingan kompleksitas ruang keduanya dengan analogi sederhana."
 3. **Minta Penjelasan Bertahap**: Jika jawaban pertama terlalu umum, berikan instruksi lanjutan untuk memperdalam bagian tertentu.
 4. **Verifikasi Mandiri**: Cocokkan poin penjelasan dari AI dengan slide materi perkuliahan Fasilkom UI atau buku teks resmi sebelum menggunakannya dalam pemahaman Anda.
-
----
 
 ## 2. Menulis & Debugging Kode di Editor (Menggunakan IDE Copilot)
 
@@ -33,8 +39,6 @@ Untuk mempercepat penulisan kode rutin dan menyelesaikan error saat pengerjaan t
    * Sorot (*highlight*) baris kode yang mengalami kegagalan atau pesan error terminal.
    * Buka panel *IDE Chat* dan minta penjelasan penyebab error beserta saran perbaikannya.
 4. **Jalankan Pengujian Lokal**: Selalu jalankan *unit test* atau tes manual di lingkungan lokal Anda setelah menerima perbaikan kode.
-
----
 
 ## 3. Mengelola & Refactoring Proyek Multi-Berkas (Menggunakan Autonomous Coding Agent)
 
@@ -60,8 +64,6 @@ Penggunaan AI dalam pengerjaan tugas di Fasilkom UI wajib disertai dengan transp
 1. **Catat Riwayat Penggunaan**: Simpan daftar perangkat AI yang Anda gunakan serta jenis bantuan yang Anda minta selama pengerjaan tugas.
 2. **Identifikasi Proses Verifikasi**: Tuliskan minimal 2-3 poin mengenai apa yang Anda periksa, kritisi, atau perbaiki dari keluaran AI tersebut secara mandiri.
 3. **Lampirkan Pernyataan Refleksi**: Tambahkan bagian *Acknowledgement / Refleksi Penggunaan AI* pada berkas `README.md` repositori tugas atau laporan sesuai dengan ketentuan mata kuliah (lihat [Panduan Praktis DDP 1](panduan-praktis-ddp1.md) dan [Panduan Praktis PBP](panduan-praktis-pbp.md)).
-
----
 
 ## 5. Referensi Dokumen Terkait
 
