@@ -45,6 +45,52 @@ Berikut langkah-langkah memasang _role prompt_ pada ChatGPT (antarmuka web):
 
 > **Catatan platform lain**: Google Gemini menyediakan fitur serupa melalui **Gemini Apps → Settings → System instructions** (tersedia pada versi tertentu). Antarmuka mungkin berbeda, tetapi prinsipnya sama: Anda menuliskan instruksi peran yang akan disisipkan ke setiap percakapan baru.
 
+### Memasang Role Prompt pada Copilot di IDE / Text Editor
+
+Berbeda dengan _web chat_ yang hanya mengenal satu set _custom instructions_ aktif, IDE seperti VS Code dan JetBrains mendukung pemasangan _role prompt_ pada Copilot melalui berkas instruksi yang diletakkan di repositori proyek. Pendekatan ini memberi keuntungan: _role prompt_ ikut ter-_track_ di Git, sehingga seluruh tim dapat berbagi konfigurasi peran yang konsisten.
+
+#### VS Code (GitHub Copilot)
+
+1. **Buat Berkas Instruksi**: Di _root_ (akar) repositori proyek Anda, buat direktori `.github` (jika belum ada), kemudian buat berkas bernama `copilot-instructions.md`.
+   ```
+   .github/copilot-instructions.md
+   ```
+2. **Tulis Role Prompt**: Buka berkas tersebut dan tuliskan instruksi peran dalam format Markdown. Contoh untuk peran "asisten dosen pembimbing":
+   ```markdown
+   # Instructions for Copilot
+
+   - Bertindaklah sebagai asisten dosen pembimbing (asdos) untuk mata kuliah DDP 1.
+   - Jangan memberikan solusi kode lengkap secara langsung. Berikan petunjuk,
+     scaffolding, atau pertanyaan pemandu agar mahasiswa berpikir sendiri.
+   - Jelaskan konsep sebelum menulis kode.
+   - Gunakan Bahasa Indonesia untuk penjelasan; kode tetap dalam Bahasa Inggris.
+   - Jika mahasiswa menempel soal tugas secara verbatim, tolak dan arahkan
+     untuk mendiskusikan pendekatan algoritmik terlebih dahulu.
+   ```
+3. **Aktifkan Penggunaan Berkas Instruksi**: Buka VS Code Settings (`Ctrl+,` / `Cmd+,`), cari **"GitHub > Copilot > Chat > Code Generation: Use Instruction Files"**, dan pastikan opsi tersebut aktif (centang). VS Code akan otomatis mendeteksi berkas `copilot-instructions.md` di _root_ _workspace_ dan menyisipkannya ke setiap permintaan Copilot Chat.
+4. **Verifikasi**: Buka panel Copilot Chat (`Ctrl+Shift+I` / `Cmd+Shift+I`), lalu ajukan pertanyaan uji. Periksa apakah respons Copilot sudah sesuai dengan _role prompt_ yang Anda tulis.
+
+!!! tip "Instruksi per-Fitur"
+    VS Code juga mendukung instruksi yang lebih spesifik per fitur Copilot melalui _workspace settings_ (`settings.json`). Misalnya, Anda dapat menambahkan `github.copilot.chat.codeGeneration.instructions` untuk mengatur gaya _code generation_, atau `github.copilot.chat.commitMessageGeneration.instructions` untuk mengatur gaya pesan _commit_. Fitur ini berguna ketika _role prompt_ umum di `copilot-instructions.md` belum cukup spesifik.
+
+!!! info "AGENTS.md"
+    VS Code juga mendukung berkas `AGENTS.md` yang berfungsi serupa dengan `copilot-instructions.md` — instruksi di dalamnya akan diterapkan ke semua permintaan Copilot di _workspace_. Berkas ini juga kompatibel dengan beberapa _autonomous coding agent_ lain, sehingga berguna jika Anda menggunakan lebih dari satu _tool_ AI di repositori yang sama.
+
+#### JetBrains (IntelliJ IDEA, PyCharm, WebStorm, dll.)
+
+1. **Buka Pengaturan Copilot**: Klik menu **File → Settings** (Windows/Linux) atau nama aplikasi pada _menu bar_ → **Settings** (macOS).
+2. **Navigasi ke Custom Instructions**: Pada sidebar kiri, buka **Tools → GitHub Copilot → Customizations** (atau **Edit Settings** pada beberapa versi).
+3. **Pilih Lingkup Instruksi**:
+   - **Workspace**: Instruksi berlaku hanya untuk proyek ini. Berkas akan disimpan sebagai `.github/copilot-instructions.md` di _root_ repositori.
+   - **Global**: Instruksi berlaku untuk semua proyek. Berkas disimpan di direktori konfigurasi pengguna:
+     - macOS: `~/.config/github-copilot/intellij/global-copilot-instructions.md`
+     - Windows: `%LOCALAPPDATA%\github-copilot\intellij\global-copilot-instructions.md`
+4. **Tulis Role Prompt**: Tuliskan instruksi peran dalam format Markdown, sama seperti contoh untuk VS Code di atas.
+5. **Simpan**: Klik **Apply** / **OK**. Instruksi akan otomatis disisipkan ke Copilot Chat pada IDE.
+
+!!! warning "Periksa Versi Ekstensi"
+    Fitur _custom instructions_ pada JetBrains memerlukan ekstensi GitHub Copilot versi terkini. Jika opsi tidak muncul, perbarui ekstensi melalui **Settings → Plugins → GitHub Copilot → Update**.
+
 ## 1. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
 
 Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjutan atau konsep *multi-threading*), Anda dapat memanfaatkan antarmuka percakapan web (seperti ChatGPT atau Google Gemini) sebagai mitra diskusi.
