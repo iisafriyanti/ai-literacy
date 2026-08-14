@@ -16,6 +16,14 @@ Dalam kasus AI yang sangat membantu, bisa jadi AI langsung mengerjakan instruksi
 
 > Braindump off
 
+## Role Prompting
+
+Setelah mengetahui isu mengenai _sycophancy_ dan tendensi AI untuk terlalu "membantu" penggunanya, Anda perlu mampu menginstruksikan AI agar lebih tepat guna dalam membantu Anda dalam belajar. Mengingat Anda akan sering berinteraksi dengan AI, maka Anda perlu mengatur "sifat" AI yang akan digunakan secara _default_. Hal ini dapat dicapai dengan cara membuat instruksi bagi AI agar berperan sesuai instruksi yang diinginkan, atau dikenal sebagai _role prompt_.
+
+### Contoh: Burhan (Role Asdos)
+
+TBD.
+
 ## 1. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
 
 Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjutan atau konsep *multi-threading*), Anda dapat memanfaatkan antarmuka percakapan web (seperti ChatGPT atau Google Gemini) sebagai mitra diskusi.
