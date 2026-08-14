@@ -4,7 +4,9 @@ Panduan ini bertujuan untuk memberikan contoh penggunaan *tools* AI dalam kegiat
 
 > **Catatan Konsep**: Untuk penjelasan konseptual mengenai dasar-dasar LLM, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
 
-## 1. Menghindari Sycophancy Dengan Role Prompting
+---
+
+## 1. Menghindari Sycophancy dengan Role Prompting
 
 ### 1.1 Sycophancy / "Yes Man"
 
@@ -81,13 +83,11 @@ Ground your responses to the following resources used in the course and proactiv
 !!! note "Mengenal Context7 & MCP"
     **Context7** adalah layanan *indexing* dokumentasi teknis yang memungkinkan LLM mengambil cuplikan dokumentasi dan contoh kode resmi melalui protokol **Model Context Protocol (MCP)**. Fitur ini memastikan AI merujuk pada versi dokumentasi yang tepat dan mengurangi risiko halusinasi.
 
-## 2. Kustomisasi Tools AI
+---
 
-> Braindump on
+## 2. Kustomisasi & Automasi Role Prompting pada Tools AI
 
-Anda sudah mengetahui AI bisa diberikan sebuah peran melalui instruksi teks. Anda bisa menuliskan _role prompt_ setiap kali anda memulai percakapan dengan AI. Namun hal ini akan melelahkan/*tedious*. Belum lagi ada kemungkinan anda juga salah menuliskan instruksi. Oleh karena itu, anda akan belajar bagaimana mengatur *tools* AI anda supaya sudah diprogram dari awal mengadopsi _role prompt_.
-
-> Braindump off
+Menuliskan *role prompt* secara manual setiap kali Anda memulai sesi percakapan baru dengan AI tentu tidak efisien dan berisiko memunculkan ketidakkonsistenan instruksi. Untuk mengatasi hal ini, Anda dapat mengonfigurasi *tools* AI agar secara otomatis mengadopsi *role prompt* yang Anda tentukan pada setiap sesi pengerjaan.
 
 ### 2.1 Memasang Role Prompt pada Web Chat Assistant
 
@@ -110,64 +110,38 @@ Berikut langkah-langkah memasang *role prompt* pada ChatGPT (antarmuka web):
 
 > **Catatan platform lain**: Google Gemini menyediakan fitur serupa melalui **Gemini Apps → Settings → System instructions** (tersedia pada versi tertentu). Antarmuka mungkin berbeda, tetapi prinsipnya sama: Anda menuliskan instruksi peran yang akan disisipkan ke setiap percakapan baru.
 
-### 2.2 Memasang Role Prompt pada Copilot di IDE / Text Editor
+---
 
-> Braindump on
+### 2.2 Repositori-Level AI Instructions via AGENTS.md
 
-Karena banyaknya variasi mekanisme custom instruction lintas IDE dan teks editor,
-banyak pengembang sudah mulai menggunakan standard berkas AGENTS.md untuk menempatkan instruksi yang harus dibaca *tools* AI ketika bekerja pada sebuah *codebase*.
+Berbeda dengan *web chat* yang mengandalkan pengaturan pribadi per pengguna, alur kerja di lingkungan pengodingan (*codebase*) makin mengadopsi standar terbuka berupa berkas **`AGENTS.md`**.
 
-> Instruksi untuk Airi: Airi, penjelasan cara-cara custom instructions di bawah tolong dihapus saja. Ganti dengan penjelasan mengenai AGENTS.md.
+`AGENTS.md` adalah berkas Markdown yang diletakkan di direktori utama (*root*) repositori proyek. Berkas ini berfungsi sebagai panduan pusat bagi berbagai *tools* AI—mulai dari IDE Copilot (VS Code, Cursor, JetBrains) hingga *autonomous coding agent* (seperti Claude Code dan Antigravity)—agar memahami aturan proyek, peran yang diharapkan, serta gaya penulisan kode yang berlaku.
 
-> Braindump off
+```
+proyek-anda/
+├── .git/
+├── AGENTS.md   <-- Berkas instruksi AI repositori
+├── src/
+└── README.md
+```
 
-Berbeda dengan *web chat* yang hanya mengenal satu set *custom instructions* aktif, IDE seperti VS Code dan JetBrains mendukung pemasangan *role prompt* pada Copilot melalui berkas instruksi yang diletakkan di repositori proyek. Pendekatan ini memberi keuntungan: *role prompt* ikut ter-*track* di Git, sehingga seluruh tim dapat berbagi konfigurasi peran yang konsisten.
+#### Keuntungan Menggunakan `AGENTS.md`:
+* **Lintas Perangkat (*Cross-Tool Compatibility*)**: Dibaca secara otomatis oleh berbagai AI assistant dan coding agent tanpa perlu konfigurasi khusus per aplikasi.
+* **Ter-track oleh Version Control**: Disimpan bersama repositori Git, sehingga seluruh anggota tim kelompok atau asisten praktikum berbagi konteks peran yang identik.
+* **Fleksibel & Terstruktur**: Anda dapat menuliskan peran asdos, standar sintaksis, serta aturan pengujian dalam format Markdown yang bersih.
 
-#### VS Code (GitHub Copilot)
+#### Penerapan Role Prompt pada `AGENTS.md`:
+Anda tidak perlu membuat format instruksi baru dari awal. Anda cukup menyalin isi **_role prompt_ Burhan (Asdos PBP)** yang sudah kita bahas pada [Seksi 1.3](#13-contoh-role-prompt-burhan-asdos-pbp) langsung ke dalam berkas `AGENTS.md` di *root* repositori proyek Anda.
 
-1. **Buat Berkas Instruksi**: Di *root* (akar) repositori proyek Anda, buat direktori `.github` (jika belum ada), kemudian buat berkas bernama `copilot-instructions.md`.
-   ```
-   .github/copilot-instructions.md
-   ```
-2. **Tulis Role Prompt**: Buka berkas tersebut dan tuliskan instruksi peran dalam format Markdown. Contoh untuk peran "asisten dosen pembimbing":
-   ```markdown
-   # Instructions for Copilot
+Dengan menempatkan *role prompt* tersebut di `AGENTS.md`, seluruh *tools* AI yang bekerja pada *workspace* proyek Anda (seperti Copilot Chat di VS Code/JetBrains hingga Autonomous Agent seperti Claude Code dan Antigravity) akan otomatis membaca instruksi tersebut dan bertindak sebagai Asdos Burhan yang membimbing dengan metode Sokratis.
 
-   - Bertindaklah sebagai asisten dosen pembimbing (asdos) untuk mata kuliah DDP 1.
-   - Jangan memberikan solusi kode lengkap secara langsung. Berikan petunjuk,
-     scaffolding, atau pertanyaan pemandu agar mahasiswa berpikir sendiri.
-   - Jelaskan konsep sebelum menulis kode.
-   - Gunakan Bahasa Indonesia untuk penjelasan; kode tetap dalam Bahasa Inggris.
-   - Jika mahasiswa menempel soal tugas secara verbatim, tolak dan arahkan
-     untuk mendiskusikan pendekatan algoritmik terlebih dahulu.
-   ```
-3. **Aktifkan Penggunaan Berkas Instruksi**: Buka VS Code Settings (`Ctrl+,` / `Cmd+,`), cari **"GitHub > Copilot > Chat > Code Generation: Use Instruction Files"**, dan pastikan opsi tersebut aktif (centang). VS Code akan otomatis mendeteksi berkas `copilot-instructions.md` di *root* *workspace* dan menyisipkannya ke setiap permintaan Copilot Chat.
-4. **Verifikasi**: Buka panel Copilot Chat (`Ctrl+Shift+I` / `Cmd+Shift+I`), lalu ajukan pertanyaan uji. Periksa apakah respons Copilot sudah sesuai dengan *role prompt* yang Anda tulis.
-
-!!! tip "Instruksi per-Fitur"
-    VS Code juga mendukung instruksi yang lebih spesifik per fitur Copilot melalui *workspace settings* (`settings.json`). Misalnya, Anda dapat menambahkan `github.copilot.chat.codeGeneration.instructions` untuk mengatur gaya *code generation*, atau `github.copilot.chat.commitMessageGeneration.instructions` untuk mengatur gaya pesan *commit*. Fitur ini berguna ketika *role prompt* umum di `copilot-instructions.md` belum cukup spesifik.
-
-!!! info "AGENTS.md"
-    VS Code juga mendukung berkas `AGENTS.md` yang berfungsi serupa dengan `copilot-instructions.md` — instruksi di dalamnya akan diterapkan ke semua permintaan Copilot di *workspace*. Berkas ini juga kompatibel dengan beberapa *autonomous coding agent* lain, sehingga berguna jika Anda menggunakan lebih dari satu *tool* AI di repositori yang sama.
-
-#### JetBrains (IntelliJ IDEA, PyCharm, WebStorm, dll.)
-
-1. **Buka Pengaturan Copilot**: Klik menu **File → Settings** (Windows/Linux) atau nama aplikasi pada *menu bar* → **Settings** (macOS).
-2. **Navigasi ke Custom Instructions**: Pada sidebar kiri, buka **Tools → GitHub Copilot → Customizations** (atau **Edit Settings** pada beberapa versi).
-3. **Pilih Lingkup Instruksi**:
-   - **Workspace**: Instruksi berlaku hanya untuk proyek ini. Berkas akan disimpan sebagai `.github/copilot-instructions.md` di *root* repositori.
-   - **Global**: Instruksi berlaku untuk semua proyek. Berkas disimpan di direktori konfigurasi pengguna:
-     - macOS: `~/.config/github-copilot/intellij/global-copilot-instructions.md`
-     - Windows: `%LOCALAPPDATA%\github-copilot\intellij\global-copilot-instructions.md`
-4. **Tulis Role Prompt**: Tuliskan instruksi peran dalam format Markdown, sama seperti contoh untuk VS Code di atas.
-5. **Simpan**: Klik **Apply** / **OK**. Instruksi akan otomatis disisipkan ke Copilot Chat pada IDE.
-
-!!! warning "Periksa Versi Ekstensi"
-    Fitur *custom instructions* pada JetBrains memerlukan ekstensi GitHub Copilot versi terkini. Jika opsi tidak muncul, perbarui ekstensi melalui **Settings → Plugins → GitHub Copilot → Update**.
+!!! info "Standar Berkas Instruksi"
+    Selain `AGENTS.md`, beberapa perangkat spesifik seperti GitHub Copilot juga mengenali `.github/copilot-instructions.md`. Namun, menggunakan `AGENTS.md` sangat direkomendasikan karena sifatnya yang universal untuk berbagai agen pengodingan modern.
 
 ---
 
-## 2. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
+## 3. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
 
 Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjutan atau konsep *multi-threading*), Anda dapat memanfaatkan antarmuka percakapan web (seperti ChatGPT atau Google Gemini) sebagai mitra diskusi.
 
@@ -180,7 +154,7 @@ Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjut
 
 ---
 
-## 3. Menulis & Debugging Kode di Editor (Menggunakan IDE Copilot)
+## 4. Menulis & Debugging Kode di Editor (Menggunakan IDE Copilot)
 
 Untuk mempercepat penulisan kode rutin dan menyelesaikan error saat pengerjaan tugas pemrograman di editor (seperti VS Code atau JetBrains), manfaatkan *IDE Embedded Copilot* (seperti GitHub Copilot atau Cursor).
 
@@ -195,7 +169,7 @@ Untuk mempercepat penulisan kode rutin dan menyelesaikan error saat pengerjaan t
 
 ---
 
-## 4. Mengelola & Refactoring Proyek Multi-Berkas (Menggunakan Autonomous Coding Agent)
+## 5. Mengelola & Refactoring Proyek Multi-Berkas (Menggunakan Autonomous Coding Agent)
 
 Saat mengerjakan proyek skala menengah hingga besar yang melibatkan banyak berkas (seperti proyek kelompok PBP atau APS), Anda dapat menggunakan *Autonomous Coding Agent* (seperti Claude Code atau Google Antigravity) yang berjalan di lingkungan terminal/workspace.
 
@@ -211,7 +185,7 @@ Saat mengerjakan proyek skala menengah hingga besar yang melibatkan banyak berka
 
 ---
 
-## 5. Menyusun Transparansi & Refleksi Penggunaan AI
+## 6. Menyusun Transparansi & Refleksi Penggunaan AI
 
 Penggunaan AI dalam pengerjaan tugas di Fasilkom UI wajib disertai dengan transparansi dan refleksi proses berpikir.
 
@@ -222,7 +196,7 @@ Penggunaan AI dalam pengerjaan tugas di Fasilkom UI wajib disertai dengan transp
 
 ---
 
-## 6. Referensi Dokumen Terkait
+## 7. Referensi Dokumen Terkait
 
 * [Mengenal Chatbot AI](mengenal-chatbot-ai.md) — Konsep dasar LLM, antarmuka percakapan, dan penanganan halusinasi.
 * [Teknik Prompting Dasar](teknik-prompting.md) — Kerangka penyusunan prompt terstruktur (T-K-F-N).
