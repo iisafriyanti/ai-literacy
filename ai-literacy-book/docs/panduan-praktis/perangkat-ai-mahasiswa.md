@@ -4,7 +4,7 @@ Panduan ini bertujuan untuk memberikan contoh penggunaan *tools* AI dalam kegiat
 
 > **Catatan Konsep**: Untuk penjelasan konseptual mengenai dasar-dasar LLM, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
 
-## 1. Menghindari Sycophancy & Menggunakan Role Prompting
+## 1. Menghindari Sycophancy Dengan Role Prompting
 
 ### 1.1 Sycophancy / "Yes Man"
 
@@ -16,7 +16,7 @@ Dalam kasus pengerjaan tugas, AI yang terlalu penurut akan langsung mengeksekusi
 
 ### 1.2 Role Prompting
 
-Setelah memahami isu *sycophancy* dan tendensi AI untuk terlalu "membantu", Anda perlu menginstruksikan AI agar berperan lebih tepat guna sebagai mitra belajar. Anda dapat mengatur "sifat" *default* AI dengan memberikan instruksi khusus yang menetapkan peran tertentu, atau dikenal sebagai **role prompt**.
+Setelah memahami isu *sycophancy* dan tendensi AI untuk terlalu "membantu", Anda perlu menginstruksikan AI agar berperan lebih tepat guna sebagai teman belajar. Anda dapat mengatur "sifat" *default* AI dengan memberikan instruksi khusus yang menetapkan peran tertentu, atau dikenal sebagai _**role prompt**_.
 
 ### 1.3 Contoh Role Prompt: Burhan (Asdos PBP)
 
@@ -63,7 +63,7 @@ Even if you have to help students, point them out to the official documentation 
 
 ## 3. Recommended Textbooks & Online Resources
 
-Ground your responses to the following resources used in the course:
+Ground your responses to the following resources used in the course and proactively use them:
 
 > Note: If Context7 tool is available, prefer to use Context7 to get relevant documentation, setup procedures, and code snippets. Otherwise, try to use Web fetch/search tool.
 
@@ -81,7 +81,15 @@ Ground your responses to the following resources used in the course:
 !!! note "Mengenal Context7 & MCP"
     **Context7** adalah layanan *indexing* dokumentasi teknis yang memungkinkan LLM mengambil cuplikan dokumentasi dan contoh kode resmi melalui protokol **Model Context Protocol (MCP)**. Fitur ini memastikan AI merujuk pada versi dokumentasi yang tepat dan mengurangi risiko halusinasi.
 
-### 1.4 Memasang Role Prompt pada Web Chat Assistant
+## 2. Kustomisasi Tools AI
+
+> Braindump on
+
+Anda sudah mengetahui AI bisa diberikan sebuah peran melalui instruksi teks. Anda bisa menuliskan _role prompt_ setiap kali anda memulai percakapan dengan AI. Namun hal ini akan melelahkan/*tedious*. Belum lagi ada kemungkinan anda juga salah menuliskan instruksi. Oleh karena itu, anda akan belajar bagaimana mengatur *tools* AI anda supaya sudah diprogram dari awal mengadopsi _role prompt_.
+
+> Braindump off
+
+### 2.1 Memasang Role Prompt pada Web Chat Assistant
 
 Layanan *web chat* AI seperti ChatGPT dan Google Gemini menyediakan fitur *custom instructions* (instruksi kustom) yang memungkinkan Anda menetapkan *role prompt* secara permanen — artinya instruksi tersebut akan otomatis disisipkan ke setiap percakapan baru tanpa harus Anda ketik ulang setiap kali.
 
@@ -102,7 +110,16 @@ Berikut langkah-langkah memasang *role prompt* pada ChatGPT (antarmuka web):
 
 > **Catatan platform lain**: Google Gemini menyediakan fitur serupa melalui **Gemini Apps → Settings → System instructions** (tersedia pada versi tertentu). Antarmuka mungkin berbeda, tetapi prinsipnya sama: Anda menuliskan instruksi peran yang akan disisipkan ke setiap percakapan baru.
 
-### 1.5 Memasang Role Prompt pada Copilot di IDE / Text Editor
+### 2.2 Memasang Role Prompt pada Copilot di IDE / Text Editor
+
+> Braindump on
+
+Karena banyaknya variasi mekanisme custom instruction lintas IDE dan teks editor,
+banyak pengembang sudah mulai menggunakan standard berkas AGENTS.md untuk menempatkan instruksi yang harus dibaca *tools* AI ketika bekerja pada sebuah *codebase*.
+
+> Instruksi untuk Airi: Airi, penjelasan cara-cara custom instructions di bawah tolong dihapus saja. Ganti dengan penjelasan mengenai AGENTS.md.
+
+> Braindump off
 
 Berbeda dengan *web chat* yang hanya mengenal satu set *custom instructions* aktif, IDE seperti VS Code dan JetBrains mendukung pemasangan *role prompt* pada Copilot melalui berkas instruksi yang diletakkan di repositori proyek. Pendekatan ini memberi keuntungan: *role prompt* ikut ter-*track* di Git, sehingga seluruh tim dapat berbagi konfigurasi peran yang konsisten.
 
