@@ -4,25 +4,42 @@ Panduan ini bertujuan untuk memberikan contoh penggunaan *tools* AI dalam kegiat
 
 > **Catatan Konsep**: Untuk penjelasan konseptual mengenai dasar-dasar LLM, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
 
----
-
 ## 1. Menghindari Sycophancy dengan Role Prompting
 
 ### 1.1 Sycophancy / "Yes Man"
 
-Penyedia layanan *generative* AI seperti OpenAI dan Anthropic telah melatih LLM mereka agar dapat berperan sebagai asisten yang berusaha menolong sebaik mungkin penggunanya. Peran tersebut menjadi *default* yang dipakai oleh pengguna *tools* yang diharapkan sudah mencakup mayoritas kebutuhan penggunanya.
+Penyedia layanan *generative* AI seperti OpenAI dan Anthropic telah melatih LLM mereka agar dapat berperan sebagai asisten yang berusaha menolong sebaik mungkin penggunanya. Peran tersebut menjadi *default* dan dipakai oleh pengguna *tools* dengan harapan sudah mencakup mayoritas kebutuhan penggunanya.
 
-Namun, peran *default* tersebut berpotensi tidak sesuai dengan konteks kebutuhan pembelajaran Anda. Sebagai asisten yang "selalu ingin menyenangkan pengguna", AI memiliki kecenderungan untuk merespon perintah dengan bahasa yang sangat positif, menyetujui pendapat pengguna meskipun salah, bahkan menutupi kekurangan atau kesalahan sintaksis yang sebenarnya sudah teridentifikasi. Fenomena ini umum disebut sebagai **sycophancy** (perilaku *yes-man*).
+Namun, peran *default* tersebut berpotensi tidak sesuai dengan konteks kebutuhan pembelajaran Anda. Sebagai asisten yang "selalu ingin menyenangkan pengguna", AI memiliki kecenderungan untuk merespon perintah dengan bahasa yang sangat positif, menyetujui pendapat pengguna meskipun salah, bahkan menutupi kekurangan atau kesalahan pada respon yang sebenarnya sudah teridentifikasi. Fenomena ini umum disebut sebagai **sycophancy** (perilaku *yes-man*).
 
-Dalam kasus pengerjaan tugas, AI yang terlalu penurut akan langsung mengeksekusi instruksi yang diberikan tanpa memikirkan konteks edukatif di baliknya. Misalnya, ketika Anda meminta AI untuk membuatkan fungsi pengurutan (*sort*) elemen integer sebagai bagian dari tugas praktikum pemrograman, AI dengan konfigurasi *default* yang *sycophantic* akan langsung memberikan kode solusi lengkap. Hal ini menyebabkan Anda kehilangan proses berpikir kritis dan tidak melatih logika pemecahan masalah secara mandiri (*cognitive offloading*).
+Misalkan, ada pengguna memakai AI untuk membantu mengerjakan tugas pemrograman kuliah struktur data. Pengguna meminta AI untuk membuatkan fungsi pengurutan (*sorting*) elemen integer. AI yang terlalu menurut akan langsung menjalankan instruksi yang diberikan tanpa memikirkan konteks edukasi di baliknya. AI dapat langsung memberikan kode solusi lengkap. Hal ini akan menyebabkan pengguna tersebut kehilangan proses berpikir kritis dan tidak melatih logika pemecahan masalah secara mandiri (dikenal dengan istilah *cognitive offloading*).
 
 ### 1.2 Role Prompting
 
-Setelah memahami isu *sycophancy* dan tendensi AI untuk terlalu "membantu", Anda perlu menginstruksikan AI agar berperan lebih tepat guna sebagai teman belajar. Anda dapat mengatur "sifat" *default* AI dengan memberikan instruksi khusus yang menetapkan peran tertentu, atau dikenal sebagai _**role prompt**_.
+Peran *default* AI bisa diatur supaya lebih sesuai dengan kebutuhan pengguna. Instruksi penyesuaian peran bisa dituliskan sebagai bagian dari *prompt* yang diberikan kepada AI. Pendekatan ini dikenal sebagai *role prompting*.
 
-### 1.3 Contoh Role Prompt: Burhan (Asdos PBP)
+Contoh populer dari penerapan *role prompting* adalah meminta AI agar berbicara dengan gaya tertentu.
+Misalnya, Anda ingin AI agar berbicara dengan gaya bahasa *brainrot* generasi Z untuk menjelaskan cara kerja *HTTP routing* pada berkas `views.py`.
+Contoh *prompt* dan respon yang dihasilkan menggunakan GitHub Copilot di VS Code dapat dilihat di *screenshot* berikut:
 
-Berikut ini adalah salah satu contoh *role prompt* yang dikembangkan untuk mata kuliah **Pemrograman Berbasiskan Platform (PBP)** di Fasilkom UI. Prompt ini dirancang khusus agar AI bertindak sebagai asisten dosen yang membimbing dengan metode Sokratis:
+<!-- TODO: Insert screenshot from VS Code here -->
+
+```markdown
+Speak like a gen Z teenager who addicted to brainrot memes.
+
+Please explain how HTTP routing works at views.py.
+```
+
+Contoh di atas masih terbilang santai, namun bisa mendemonstrasikan bahwa AI bisa dikustomisasi sesuai keinginan menggunakan *prompt*.
+Tentu saja kemampuan seberapa jauh AI bisa mengikuti instruksi tergantung dari kualitas hasil pelatihan (*training*) model AI dan konfigurasi pengamanan (*guardrail*) yang telah diatur oleh penyedia layanan AI.
+Sebagaimana teknologi-teknologi pada umumnya, AI bisa dipakai untuk hal positif dan juga hal negatif.
+
+Untuk contoh *role prompt* yang lebih serius, mari lihat *role prompt* asisten dosen bernama Burhan di subbab selanjutnya.
+
+### 1.3 Contoh Role Prompt: Burhan (Asisten Dosen PBP)
+
+Berikut ini adalah salah satu contoh *role prompt* yang dikembangkan untuk mata kuliah **Pemrograman Berbasiskan Platform (PBP)** di Fasilkom UI.
+*Prompt* ini dirancang khusus agar AI bertindak sebagai asisten dosen yang membimbing tanpa memberikan solusi secara eksplisit (atau sering dikenal sebagai metode Sokratis):
 
 ```markdown
 <!-- Berikut ini adalah komentar yang menjelaskan contoh role prompt.
@@ -31,10 +48,10 @@ Berikut ini adalah salah satu contoh *role prompt* yang dikembangkan untuk mata 
   =============================================================================
   ROLE PROMPT: Burhan (Asisten Dosen Kuliah PBP)
   =============================================================================
-  - Persona Asdos: Mengambil peran sebagai Burhan, asisten dosen PBP Fasilkom UI.
+  - Persona: Mengambil peran sebagai Burhan, asisten dosen PBP Fasilkom UI.
   - Bahasa Prompt: Prompt ditulis dalam Bahasa Inggris agar mencapai kepatuhan 
-    instruksi (*instruction-following*) tertinggi pada frontier LLM, namun AI 
-    diinstruksikan merespons sesuai bahasa masukan mahasiswa (Indonesia/Inggris).
+    instruksi (*instruction-following*) tertinggi pada model-model terkini
+    (disebut juga sebagai frontier models).
   - Metode Sokratis: Melarang AI memberikan solusi kode langsung; mewajibkan 
     pertanyaan pemandu dan pembimbingan langkah demi langkah.
   - Dokumentasi Terpercaya: Menyertakan tautan langsung ke dokumentasi resmi 
@@ -54,14 +71,14 @@ Even if you have to help students, point them out to the official documentation 
 
 ## 1. Core Responsibilities & Workflows
 
-- **Socratic Guidance**: Help students discover solutions themselves by asking probing questions, identifying logic flaws, and explaining core concepts.
-- **Documentation First**: Direct students to official documentation resources (MDN, Django Docs, Flutter Docs, web.dev) and teach them how to read stack traces.
-- **Bilingual Support**: Respond in whichever language the student uses, **Bahasa Indonesia** or **English**.
+- Socratic Guidance: Help students discover solutions themselves by asking probing questions, identifying logic flaws, and explaining core concepts.
+- Documentation First: Direct students to official documentation resources (MDN, Django Docs, Flutter Docs, web.dev) and teach them how to read stack traces.
+- Bilingual Support: Respond in whichever language the student uses, Bahasa Indonesia or English.
 
 ## 2. Communication Style
 
-- **Language**: Bahasa Indonesia or English (matching input).
-- **Tone**: Patient, encouraging, firm on boundaries, and academically supportive.
+- Language: Bahasa Indonesia or English (matching input).
+- Tone: Patient, encouraging, firm on boundaries, and academically supportive.
 
 ## 3. Recommended Textbooks & Online Resources
 
@@ -81,13 +98,15 @@ Ground your responses to the following resources used in the course and proactiv
 ```
 
 !!! note "Mengenal Context7 & MCP"
-    **Context7** adalah layanan *indexing* dokumentasi teknis yang memungkinkan LLM mengambil cuplikan dokumentasi dan contoh kode resmi melalui protokol **Model Context Protocol (MCP)**. Fitur ini memastikan AI merujuk pada versi dokumentasi yang tepat dan mengurangi risiko halusinasi.
+    Context7 adalah layanan *indexing* dokumentasi teknis yang memungkinkan LLM mengambil cuplikan dokumentasi dan contoh kode resmi melalui protokol **Model Context Protocol (MCP)**. Fitur ini memastikan AI merujuk pada versi dokumentasi yang tepat dan mengurangi risiko halusinasi.
 
----
+*Role prompt* Burhan masih bisa Anda kustomisasi. Bahkan jika Anda mau, Anda bisa membuat Burhan berbicara dengan gaya *brainrot* seperti pada contoh sebelumnya.
+Silakan coba ubah gaya bicara ketika Anda mencoba *role prompt* Burhan. Jangan lupa kembalikan lagi ke gaya bicara normalnya.
 
-## 2. Kustomisasi & Automasi Role Prompting pada Tools AI
+## 2. Kustomisasi & Otomasi Role Prompting pada Tools AI
 
-Menuliskan *role prompt* secara manual setiap kali Anda memulai sesi percakapan baru dengan AI tentu tidak efisien dan berisiko memunculkan ketidakkonsistenan instruksi. Untuk mengatasi hal ini, Anda dapat mengonfigurasi *tools* AI agar secara otomatis mengadopsi *role prompt* yang Anda tentukan pada setiap sesi pengerjaan.
+Menuliskan *role prompt* secara manual setiap kali Anda memulai sesi percakapan baru dengan AI tentu tidak efisien dan berisiko menuliskan instruksi yang tidak konsisten.
+Untuk mengatasi hal ini, Anda dapat mengatur *tools* AI agar secara otomatis mengadopsi *role prompt* tertentu setiap kali Anda berinteraksi dengan AI.
 
 ### 2.1 Memasang Role Prompt pada Web Chat Assistant
 
@@ -97,106 +116,162 @@ Berikut langkah-langkah memasang *role prompt* pada ChatGPT (antarmuka web):
 
 1. **Buka Pengaturan *Custom Instructions***: Klik ikon profil Anda pada sidebar kiri, kemudian pilih **Customize ChatGPT** (atau navigasi melalui **Settings → Personalization → Custom Instructions**).
 2. **Isi Kolom "What would you like ChatGPT to know about you?"**: Tuliskan informasi konteks tentang diri Anda yang relevan untuk pembelajaran.
-   * *Contoh*: "Saya mahasiswa Ilmu Komputer Universitas Indonesia yang sedang mengambil mata kuliah DDP 1. Saya sedang belajar fundamental pemrograman dan ingin memahami konsep, bukan hanya mendapatkan jawaban jadi."
+   * *Contoh*: "Saya mahasiswa <nama program studi dan kampus> yang sedang mengambil mata kuliah <nama mata kuliah>. Saya sedang belajar <nama topik yang sedang dipelajari> dan ingin memahami konsep, bukan hanya mendapatkan jawaban jadi."
 3. **Isi Kolom "How would you like ChatGPT to respond?"**: Tuliskan *role prompt* yang mendefinisikan perilaku AI yang Anda inginkan.
-   * *Contoh*: "Bertindaklah sebagai asisten dosen (asdos) yang berdedikasi. Jika saya meminta solusi langsung untuk tugas pemrograman, tolak dan arahkan saya untuk berpikir tahap demi tahap. Berikan pertanyaan pemandu, bukan jawaban final. Gunakan Bahasa Indonesia."
+   * *Contoh*: "Bertindaklah sebagai asisten dosen (asdos) yang berdedikasi. Jika saya meminta solusi langsung untuk tugas pemrograman, tolak dan arahkan saya untuk berpikir tahap demi tahap. Berikan pertanyaan pemandu, bukan jawaban final. Gunakan Bahasa Indonesia." atau gunakan *role prompt* Burhan di atas pada [subbab 1.3](#13-contoh-role-prompt-burhan-asisten-dosen-pbp).
 4. **Simpan dan Aktifkan**: Klik tombol **Save**. Pastikan *toggle* *Custom Instructions* dalam keadaan aktif (ON). *Role prompt* kini akan diterapkan pada setiap percakapan baru.
 
-!!! tip "Satu Set Aktif pada Satu Waktu"
-    ChatGPT hanya mendukung satu set *custom instructions* yang aktif pada satu waktu. Jika Anda mengganti peran (misalnya dari "asisten dosen" ke "partner *code review*"), Anda perlu menimpa isi kolom yang ada. Simpan *role prompt* Anda di berkas terpisah (misalnya di *notes* atau *markdown*) agar mudah dipasang ulang saat dibutuhkan.
+> Slop on
 
 !!! warning "Batas Karakter"
     Setiap kolom *custom instructions* memiliki batas sekitar 1.500 karakter. Tuliskan instruksi secara ringkas dan padat — setiap kalimat harus memberikan dampak yang jelas pada perilaku AI.
 
+
 > **Catatan platform lain**: Google Gemini menyediakan fitur serupa melalui **Gemini Apps → Settings → System instructions** (tersedia pada versi tertentu). Antarmuka mungkin berbeda, tetapi prinsipnya sama: Anda menuliskan instruksi peran yang akan disisipkan ke setiap percakapan baru.
 
----
+> Slop off
 
-### 2.2 Repositori-Level AI Instructions via AGENTS.md
+### 2.2 Memasang Role Prompt di Repositori Kode via AGENTS.md
 
-Berbeda dengan *web chat* yang mengandalkan pengaturan pribadi per pengguna, alur kerja di lingkungan pengodingan (*codebase*) makin mengadopsi standar terbuka berupa berkas **`AGENTS.md`**.
+Berbeda dengan *web chat* yang mengatur instruksi melalui laman web tertentu, kustomisasi *prompt* di *text editor* dan IDE mengadopsi standar berupa berkas [**`AGENTS.md`**](https://agents.md/).
+`AGENTS.md` adalah berkas Markdown yang diletakkan di direktori utama (*root*) repositori kode sumber.
+Berkas ini berfungsi sebagai panduan bagi berbagai *tools* AI agar memahami aturan proyek, peran yang diharapkan, serta gaya penulisan kode yang berlaku.
 
-`AGENTS.md` adalah berkas Markdown yang diletakkan di direktori utama (*root*) repositori proyek. Berkas ini berfungsi sebagai panduan pusat bagi berbagai *tools* AI—mulai dari IDE Copilot (VS Code, Cursor, JetBrains) hingga *autonomous coding agent* (seperti Claude Code dan Antigravity)—agar memahami aturan proyek, peran yang diharapkan, serta gaya penulisan kode yang berlaku.
+Misalnya pada sebuah proyek Django, struktur folder dan berkasnya di repositori disusun seperti contoh berikut:
 
 ```
-proyek-anda/
+contoh-django/
 ├── .git/
-├── AGENTS.md   <-- Berkas instruksi AI repositori
-├── src/
+├── AGENTS.md   <-- Berkas instruksi AI
+├── contoh_django/
+├── app_1/
 └── README.md
 ```
 
-#### Keuntungan Menggunakan `AGENTS.md`:
-* **Lintas Perangkat (*Cross-Tool Compatibility*)**: Dibaca secara otomatis oleh berbagai AI assistant dan coding agent tanpa perlu konfigurasi khusus per aplikasi.
-* **Ter-track oleh Version Control**: Disimpan bersama repositori Git, sehingga seluruh anggota tim kelompok atau asisten praktikum berbagi konteks peran yang identik.
-* **Fleksibel & Terstruktur**: Anda dapat menuliskan peran asdos, standar sintaksis, serta aturan pengujian dalam format Markdown yang bersih.
+Berkas `AGENTS.md` ditempatkan di direktori *root* yang kelak akan mengatur perilaku AI ketika beroperasi di dalam proyek Django tersebut.
 
 #### Penerapan Role Prompt pada `AGENTS.md`:
-Anda tidak perlu membuat format instruksi baru dari awal. Anda cukup menyalin isi **_role prompt_ Burhan (Asdos PBP)** yang sudah kita bahas pada [Seksi 1.3](#13-contoh-role-prompt-burhan-asdos-pbp) langsung ke dalam berkas `AGENTS.md` di *root* repositori proyek Anda.
 
-Dengan menempatkan *role prompt* tersebut di `AGENTS.md`, seluruh *tools* AI yang bekerja pada *workspace* proyek Anda (seperti Copilot Chat di VS Code/JetBrains hingga Autonomous Agent seperti Claude Code dan Antigravity) akan otomatis membaca instruksi tersebut dan bertindak sebagai Asdos Burhan yang membimbing dengan metode Sokratis.
+Anda tidak perlu membuat format instruksi baru dari awal. Anda cukup menyalin isi *role prompt* Burhan dari [subbab 1.3](#13-contoh-role-prompt-burhan-asisten-dosen-pbp) ke dalam berkas `AGENTS.md` di *root* repositori proyek Anda. Dengan menempatkan *role prompt* tersebut di `AGENTS.md`, seluruh *tools* AI yang bekerja pada *workspace* proyek Anda (seperti Copilot Chat di VS Code/JetBrains hingga *agent*/*harness* seperti Claude Code dan Antigravity) akan otomatis membaca instruksi tersebut dan bertindak sebagai Burhan yang membimbing anda seakan-akan seperti asisten dosen.
 
 !!! info "Standar Berkas Instruksi"
-    Selain `AGENTS.md`, beberapa perangkat spesifik seperti GitHub Copilot juga mengenali `.github/copilot-instructions.md`. Namun, menggunakan `AGENTS.md` sangat direkomendasikan karena sifatnya yang universal untuk berbagai agen pengodingan modern.
+    Selain `AGENTS.md`, beberapa *tools* seperti GitHub Copilot memiliki mekanisme tersendiri seperti berkas `.github/copilot-instructions.md`. Namun, menggunakan `AGENTS.md` sangat direkomendasikan karena berlaku di mayoritas *tools* AI yang dipasang pada IDE, *text editor*, dan *agent*/*harness*.
 
----
+## 3. Studi Kasus Hands-On: Burhan Membantu Debugging Django
 
-## 3. Memahami Konsep Teori & Algoritma (Menggunakan Web Chat)
+Untuk memberikan gambaran nyata tentang bagaimana *role prompt* dan berkas `AGENTS.md` bekerja dalam pengerjaan praktikum,
+mari lihat skenario alur kerja seorang mahasiswa yang sedang mengerjakan aplikasi **Inventory Barang PBP** (seperti pada repositori contoh `ai-literacy-example`).
 
-Ketika berhadapan dengan materi teori yang abstrak (seperti struktur data lanjutan atau konsep *multi-threading*), Anda dapat memanfaatkan antarmuka percakapan web (seperti ChatGPT atau Google Gemini) sebagai mitra diskusi.
+### Skenario Kasus
 
-### Langkah-langkah Praktis:
-1. **Buka Antarmuka Chatbot**: Gunakan peramban web untuk mengakses layanan chatbot berbasis web.
-2. **Sediakan Konteks Peran & Topik**: Tuliskan prompt yang menyertakan topik perkuliahan spesifik tanpa meminta jawaban tugas langsung.
-   * *Contoh*: "Saya sedang mempelajari perbedaan algoritma pencarian BFS dan DFS pada mata kuliah SDA. Berikan penjelasan perbandingan kompleksitas ruang keduanya dengan analogi sederhana."
-3. **Minta Penjelasan Bertahap**: Jika jawaban pertama terlalu umum, berikan instruksi lanjutan untuk memperdalam bagian tertentu.
-4. **Verifikasi Mandiri**: Cocokkan poin penjelasan dari AI dengan slide materi perkuliahan Fasilkom UI atau buku teks resmi sebelum menggunakannya dalam pemahaman Anda.
+* **Pengguna**: Mahasiswa semester 3 (Ilmu Komputer / Sistem Informasi).
+* **Mata Kuliah**: Pemrograman Berbasiskan Platform (PBP).
+* **Masalah**: Saat menekan tombol **Tambah Barang** pada formulir AJAX tanpa mengisi data (kolom kosong), server Django di `views.py` mengembalikan HTTP 400 (`{"status": "error", "errors": ...}`). Namun di tampilan laman web, kode JavaScript di `item_list.js` tetap menambahkan baris baru dengan nilai `undefined - Rp undefined` ke dalam tabel.
 
----
+### Langkah 1: Menyiapkan `AGENTS.md` pada Repositori Proyek
 
-## 4. Menulis & Debugging Kode di Editor (Menggunakan IDE Copilot)
+Sebelum mulai mengoding, mahasiswa membuat berkas `AGENTS.md` pada direktori utama (*root*) repositori proyek Django miliknya dan memasukkan *role prompt* Burhan sesuai contoh di subbab 1.3.
 
-Untuk mempercepat penulisan kode rutin dan menyelesaikan error saat pengerjaan tugas pemrograman di editor (seperti VS Code atau JetBrains), manfaatkan *IDE Embedded Copilot* (seperti GitHub Copilot atau Cursor).
+### Langkah 2: Mengajukan Pertanyaan pada Copilot Chat (VS Code)
 
-### Langkah-langkah Praktis:
-1. **Tuliskan Komentar Niat (*Intent Comment*)**: Sebelum meminta saran kode, tuliskan komentar ringkas di atas fungsi atau variabel yang menjelaskan tujuan kode tersebut.
-   * *Contoh*: `// Fungsi untuk memvalidasi format email pada form pendaftaran PBP`
-2. **Evaluasi Saran Autocomplete**: Tekan `Tab` untuk menerima saran kode **hanya jika** Anda sudah membaca dan memahami setiap baris logika yang disarankan.
-3. **Gunakan Inline Debugging untuk Pesan Error**:
-   * Sorot (*highlight*) baris kode yang mengalami kegagalan atau pesan error terminal.
-   * Buka panel *IDE Chat* dan minta penjelasan penyebab error beserta saran perbaikannya.
-4. **Jalankan Pengujian Lokal**: Selalu jalankan *unit test* atau tes manual di lingkungan lokal Anda setelah menerima perbaikan kode.
+Mahasiswa membuka VS Code, menyorot berkas `static/inventory/js/item_list.js` yang menangani pengiriman formulir AJAX, lalu membuka panel **GitHub Copilot Chat** (`Ctrl+Alt+I` / `Cmd+Alt+I`) dan mengetikkan prompt:
 
----
+```text
+Kak Burhan, kenapa waktu saya menekan tombol Tambah Barang dengan formulir kosong, tabel di web malah memunculkan baris baru berisi "undefined - Rp undefined", padahal server Django di views.py sudah mengembalikan HTTP 400 Bad Request?
+```
 
-## 5. Mengelola & Refactoring Proyek Multi-Berkas (Menggunakan Autonomous Coding Agent)
+### Langkah 3: Interaksi Pembimbingan Sokratis oleh AI (Asdos Burhan)
 
-Saat mengerjakan proyek skala menengah hingga besar yang melibatkan banyak berkas (seperti proyek kelompok PBP atau APS), Anda dapat menggunakan *Autonomous Coding Agent* (seperti Claude Code atau Google Antigravity) yang berjalan di lingkungan terminal/workspace.
+Karena Copilot membaca instruksi dari `AGENTS.md`, AI **tidak** langsung memberikan kode JavaScript pembetulan utuh. Sebaliknya, Copilot merespons dengan gaya pembimbingan Sokratis:
 
-### Langkah-langkah Praktis:
-1. **Buka Agent di Workspace Proyek**: Jalankan perintah Agent melalui terminal di direktori utama repositori proyek Anda.
-2. **Berikan Instruksi Berbasis Tugas**: Sampaikan tujuan revisi atau pelacakan bug yang spesifik.
-   * *Contoh*: "Periksa repositori ini, cari berkas pemrosesan autentikasi pengguna, dan buatkan skenario pengujian unit untuk penanganan error login."
-3. **Tinjau Rencana Aksi (*Action Plan*)**: Baca daftar berkas yang diusulkan oleh Agent sebelum memberikan konfirmasi eksekusi.
-4. **Audit Perubahan Kode via Git**:
-   * Jalankan perintah `git diff` untuk memeriksa perubahan baris demi baris pada setiap berkas yang dimodifikasi oleh Agent.
-   * Pastikan Anda memahami struktur arsitektur baru yang dihasilkan.
-5. **Uji Pengujian Penuh**: Jalankan perintah *build* dan pengujian otomatis proyek secara lokal sebelum melakukan *commit*.
+```text
+Halo! Mari kita telusuri alur eksekusi fetch API di JavaScript bersama-sama. 🔍
 
----
+Coba perhatikan baris berikut pada item_list.js:
+`.then(response => response.json())`
 
-## 6. Menyusun Transparansi & Refleksi Penggunaan AI
+Pertanyaan pemandu untukmu:
+1. Secara bawaan (default), apakah fungsi `fetch()` di JavaScript akan melempar error / masuk ke blok `.catch()` saat server mengembalikan kode status HTTP 400 Bad Request?
+2. Properti apa pada objek `Response` di JavaScript API yang menandakan apakah HTTP response berstatus sukses (rentang 200–299) atau gagal (seperti 400/500)?
+3. Ketika server Django mengembalikan HTTP 400, struktur data JSON apa yang dikembalikan oleh fungsi `add_item_ajax` di `views.py` (`{"status": "error", "errors": ...}`), dan kenapa `data.name` bernilai `undefined`?
+
+💡 **Petunjuk Dokumentasi**: 
+Coba baca dokumentasi resmi MDN Web Docs mengenai penggunaan Fetch API di MDN - Using Fetch dan memeriksa nilai properti Response.ok.
+```
+
+### Langkah 4: Verifikasi & Penyelesaian Mandiri oleh Mahasiswa
+
+Setelah membaca respon Burhan dan merujuk dokumentasi MDN yang disarankan:
+
+1. **Mahasiswa Mengidentifikasi Masalah**: Mahasiswa menyadari bahwa `fetch()` tidak melempar error pada HTTP 400, sehingga rantai `.then()` kedua tetap berjalan. Karena objek JSON yang diterima adalah `{"status": "error", "errors": ...}`, properti `data.name` tidak ada (`undefined`).
+2. **Mahasiswa Menuliskan Solusi Mandiri**: Mahasiswa menambahkan pengecekan `if (!response.ok)` dan menampilkan pesan kesalahan bidang formulir pada elemen `#error_name` dan `#error_price` di `item_list.js`:
+
+```javascript
+fetch(endpointUrl, {
+    method: 'POST',
+    body: formData,
+    headers: {
+        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+    }
+})
+.then(response => {
+    return response.json().then(data => ({ ok: response.ok, data: data }));
+})
+.then(result => {
+    if (!result.ok) {
+        // Tampilkan pesan error pada masing-masing elemen error bidang formulir
+        if (result.data.errors) {
+            for (const [field, messages] of Object.entries(result.data.errors)) {
+                const errorDiv = document.getElementById(`error_${field}`);
+                if (errorDiv) errorDiv.textContent = messages.join(' ');
+            }
+        }
+        return;
+    }
+
+    // Eksekusi penambahan baris jika HTTP response sukses (201 Created)
+    const tbody = document.getElementById('itemList');
+    const emptyRow = document.getElementById('emptyRow');
+    if (emptyRow) emptyRow.remove();
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${result.data.name}</td>
+        <td>Rp ${result.data.price}</td>
+        <td>${result.data.description}</td>
+    `;
+    tbody.appendChild(tr);
+    form.reset();
+})
+.catch(error => {
+    console.error('Fetch error:', error);
+});
+```
+
+3. **Pengujian Lokal**: Mahasiswa menguji ulang formulir di peramban web dan menjalankan pengujian unit (`python manage.py test inventory`) untuk memastikan penanganan validasi AJAX berfungsi dengan benar.
+
+### Langkah 5: Pencatatan Transparansi & Refleksi Penggunaan AI
+
+Sebagai pemenuhan integritas akademik Fasilkom UI, mahasiswa mencatat interaksi ini pada bagian **Refleksi AI** di berkas `README.md` repositori:
+
+```markdown
+## Refleksi Penggunaan Perangkat AI
+- **Perangkat**: GitHub Copilot Chat (VS Code) dengan `AGENTS.md` (Role Prompt Asdos Burhan).
+- **Penggunaan**: Meminta panduan penelusuran masalah munculnya nilai `undefined` di UI saat formulir AJAX mengembalikan status HTTP 400 Bad Request.
+- **Verifikasi**: AI mengarahkan saya untuk memeriksa perilaku `fetch()` dan properti `response.ok` di MDN Web Docs. Saya menuliskan sendiri logika pengecekan `if (!result.ok)` dan iterasi pesan error formulir di `item_list.js`.
+```
+
+## 4. Menyusun Transparansi & Refleksi Penggunaan AI
 
 Penggunaan AI dalam pengerjaan tugas di Fasilkom UI wajib disertai dengan transparansi dan refleksi proses berpikir.
 
 ### Langkah-langkah Praktis:
+
 1. **Catat Riwayat Penggunaan**: Simpan daftar perangkat AI yang Anda gunakan serta jenis bantuan yang Anda minta selama pengerjaan tugas.
 2. **Identifikasi Proses Verifikasi**: Tuliskan minimal 2-3 poin mengenai apa yang Anda periksa, kritisi, atau perbaiki dari keluaran AI tersebut secara mandiri.
 3. **Lampirkan Pernyataan Refleksi**: Tambahkan bagian *Acknowledgement / Refleksi Penggunaan AI* pada berkas `README.md` repositori tugas atau laporan sesuai dengan ketentuan mata kuliah (lihat [Panduan Praktis DDP 1](panduan-praktis-ddp1.md) dan [Panduan Praktis PBP](panduan-praktis-pbp.md)).
 
----
-
-## 7. Referensi Dokumen Terkait
+## 5. Referensi Dokumen Terkait
 
 * [Mengenal Chatbot AI](mengenal-chatbot-ai.md) — Konsep dasar LLM, antarmuka percakapan, dan penanganan halusinasi.
 * [Teknik Prompting Dasar](teknik-prompting.md) — Kerangka penyusunan prompt terstruktur (T-K-F-N).
