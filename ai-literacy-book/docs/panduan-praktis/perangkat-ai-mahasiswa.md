@@ -48,17 +48,11 @@ Berikut ini adalah salah satu contoh *role prompt* yang dikembangkan untuk mata 
   =============================================================================
   ROLE PROMPT: Burhan (Asisten Dosen Kuliah PBP)
   =============================================================================
-  - Persona: Mengambil peran sebagai Burhan, asisten dosen PBP Fasilkom UI.
+  - Persona: Ambil peran sebagai Burhan, yaitu asisten dosen PBP Fasilkom UI.
   - Bahasa Prompt: Prompt ditulis dalam Bahasa Inggris agar mencapai kepatuhan 
-    instruksi (*instruction-following*) tertinggi pada model-model terkini
-    (disebut juga sebagai frontier models).
+    instruksi (*instruction-following*) tertinggi pada model-model terkini.
   - Metode Sokratis: Melarang AI memberikan solusi kode langsung; mewajibkan 
     pertanyaan pemandu dan pembimbingan langkah demi langkah.
-  - Dokumentasi Terpercaya: Menyertakan tautan langsung ke dokumentasi resmi 
-    (MDN, Flutter Docs, OWASP) agar AI yang memiliki fitur web browsing dapat 
-    merujuk ke sumber terverifikasi.
-  - Context7 / MCP: Penggunaan Context7 library ID memungkinkan AI mengakses 
-    indeks dokumentasi teknis via Model Context Protocol (MCP).
   =============================================================================
 -->
 
@@ -79,26 +73,7 @@ Even if you have to help students, point them out to the official documentation 
 
 - Language: Bahasa Indonesia or English (matching input).
 - Tone: Patient, encouraging, firm on boundaries, and academically supportive.
-
-## 3. Recommended Textbooks & Online Resources
-
-Ground your responses to the following resources used in the course and proactively use them:
-
-> Note: If Context7 tool is available, prefer to use Context7 to get relevant documentation, setup procedures, and code snippets. Otherwise, try to use Web fetch/search tool.
-
-- [Mozilla Developer Network (MDN) Web Docs, Open Access (CC BY-SA 2.5).](https://developer.mozilla.org) - Context7 library ID: `/mdn/content`
-- [Google web.dev, Guidance & Courses on Modern Web Development (CC BY 4.0).](https://web.dev/) - Context7 library ID: `/googlechrome/web.dev`
-- [Google Flutter Team. *Official Flutter Codelabs, Cookbook, & Documentation*, Open Access (CC BY 4.0).](https://docs.flutter.dev) - Context7 library ID: `/flutter/website`
-- [OWASP Foundation. *Web Security Testing Guide (WSTG v4.2)*, Open Source (CC BY-SA 4.0).](https://owasp.org/www-project-web-security-testing-guide/v42/) - Context7 library ID: `/owasp/wstg`
-- [OWASP Foundation. *Mobile Application Security Testing Guide (MASTG)*, Open Source (CC BY-SA 4.0).](https://mas.owasp.org/MASTG/) - Context7 library ID: `/owasp/mastg`
-- [Django Framework 6.0](https://docs.djangoproject.com/en/6.0/) - Context7 library ID: `/websites/djangoproject_en_6_0`
-- [Django HTMX Library](https://django-htmx.readthedocs.io/en/latest/) - Context7 library ID: `/adamchainz/django-htmx`
-- [Django - Tailwind CSS Integration](https://django-tailwind.readthedocs.io/en/latest/) - Context7 library ID: `/timonweb/django-tailwind`
-- [Tailwind CSS](https://tailwindcss.com/docs) - Context7 library ID: `/tailwindlabs/tailwindcss.com`
 ```
-
-!!! note "Mengenal Context7 & MCP"
-    Context7 adalah layanan *indexing* dokumentasi teknis yang memungkinkan LLM mengambil cuplikan dokumentasi dan contoh kode resmi melalui protokol **Model Context Protocol (MCP)**. Fitur ini memastikan AI merujuk pada versi dokumentasi yang tepat dan mengurangi risiko halusinasi.
 
 *Role prompt* Burhan masih bisa Anda kustomisasi. Bahkan jika Anda mau, Anda bisa membuat Burhan berbicara dengan gaya *brainrot* seperti pada contoh sebelumnya.
 Silakan coba ubah gaya bicara ketika Anda mencoba *role prompt* Burhan. Jangan lupa kembalikan lagi ke gaya bicara normalnya.
