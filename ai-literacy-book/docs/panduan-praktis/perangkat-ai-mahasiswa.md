@@ -2,7 +2,8 @@
 
 Panduan ini bertujuan untuk memberikan contoh penggunaan *tools* AI dalam kegiatan pembelajaran di program studi Ilmu Komputer, Sistem Informasi, dan Kecerdasan Artifisial Fakultas Ilmu Komputer Universitas Indonesia.
 
-> Notes: Untuk penjelasan konseptual mengenai dasar-dasar model AI, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
+!!! note "Catatan"
+    Untuk penjelasan konseptual mengenai dasar-dasar model AI, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
 
 ## 1. Menghindari Sycophancy dengan Role Prompting
 
@@ -99,7 +100,8 @@ Sebagai contoh, berikut adalah langkah-langkah memasang *role prompt* pada ChatG
 !!! warning "Batas Jumlah Karakter"
     Kolom *custom instructions* di ChatGPT memiliki [batas jumlah karakter sekitar 1.500 karakter](https://help.openai.com/en/articles/8096356-chatgpt-custom-instructions#is-there-a-character-limit-for-custom-instructions).
 
-> **Catatan _platform_ lain**: Google Gemini menyediakan fitur serupa melalui fitur [Gems](https://gemini.google.com/gems/create) atau [Instructions for Gemini](https://gemini.google.com/saved-info). Dari uji coba penulis, kami menyarankan untuk menggunakan Gems daripada Instructions for Gemini karena *role prompt* selalu dimasukkan ketika pakai Gems. Instructions for Gemini tidak selalu menyertakannya berdasarkan pengujian penulis.
+!!! tip "Catatan Platform Lain"
+    Google Gemini menyediakan fitur serupa melalui fitur [Gems](https://gemini.google.com/gems/create) atau [Instructions for Gemini](https://gemini.google.com/saved-info). Dari uji coba penulis, kami menyarankan untuk menggunakan Gems daripada Instructions for Gemini karena *role prompt* selalu dimasukkan ketika pakai Gems. Instructions for Gemini tidak selalu menyertakannya berdasarkan pengujian penulis.
 
 ### 2.2 Memasang Role Prompt di Repositori Kode via AGENTS.md
 
@@ -226,6 +228,7 @@ Sebagai pemenuhan integritas akademik Fasilkom UI, mahasiswa mencatat interaksi 
 
 ```markdown
 ## Refleksi Penggunaan Perangkat AI
+
 - **Perangkat**: GitHub Copilot Chat (VS Code) dengan `AGENTS.md` (Role Prompt Asdos Burhan).
 - **Penggunaan**: Meminta panduan penelusuran masalah munculnya nilai `undefined` di UI saat formulir AJAX mengembalikan status HTTP 400 Bad Request.
 - **Verifikasi**: AI mengarahkan saya untuk memeriksa perilaku `fetch()` dan properti `response.ok` di MDN Web Docs. Saya menuliskan sendiri logika pengecekan `if (!result.ok)` dan iterasi pesan error formulir di `item_list.js`.
