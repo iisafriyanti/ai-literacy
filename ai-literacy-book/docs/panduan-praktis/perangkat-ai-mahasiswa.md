@@ -2,13 +2,13 @@
 
 Panduan ini bertujuan untuk memberikan contoh penggunaan *tools* AI dalam kegiatan pembelajaran di program studi Ilmu Komputer, Sistem Informasi, dan Kecerdasan Artifisial Fakultas Ilmu Komputer Universitas Indonesia.
 
-> **Catatan Konsep**: Untuk penjelasan konseptual mengenai dasar-dasar LLM, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
+> Notes: Untuk penjelasan konseptual mengenai dasar-dasar model AI, antarmuka percakapan web, dan teknik menyusun prompt umum, silakan merujuk ke [Mengenal Chatbot AI](mengenal-chatbot-ai.md) dan [Teknik Prompting Dasar](teknik-prompting.md).
 
 ## 1. Menghindari Sycophancy dengan Role Prompting
 
 ### 1.1 Sycophancy / "Yes Man"
 
-Penyedia layanan *generative* AI seperti OpenAI dan Anthropic telah melatih LLM mereka agar dapat berperan sebagai asisten yang berusaha menolong sebaik mungkin penggunanya. Peran tersebut menjadi *default* dan dipakai oleh pengguna *tools* dengan harapan sudah mencakup mayoritas kebutuhan penggunanya.
+Penyedia layanan *generative* AI seperti OpenAI dan Anthropic telah melatih model AI mereka agar dapat berperan sebagai asisten yang berusaha menolong sebaik mungkin penggunanya. Peran tersebut menjadi *default* dan dipakai oleh pengguna *tools* dengan harapan sudah mencakup mayoritas kebutuhan penggunanya.
 
 Namun, peran *default* tersebut berpotensi tidak sesuai dengan konteks kebutuhan pembelajaran Anda. Sebagai asisten yang "selalu ingin menyenangkan pengguna", AI memiliki kecenderungan untuk merespon perintah dengan bahasa yang sangat positif, menyetujui pendapat pengguna meskipun salah, bahkan menutupi kekurangan atau kesalahan pada respon yang sebenarnya sudah teridentifikasi. Fenomena ini umum disebut sebagai **sycophancy** (perilaku *yes-man*).
 
@@ -85,9 +85,9 @@ Untuk mengatasi hal ini, Anda dapat mengatur *tools* AI agar secara otomatis men
 
 ### 2.1 Memasang Role Prompt pada Web Chat Assistant
 
-Layanan *web chat* AI seperti ChatGPT dan Google Gemini menyediakan fitur *custom instructions* (instruksi kustom) yang memungkinkan Anda menetapkan *role prompt* secara permanen — artinya instruksi tersebut akan otomatis disisipkan ke setiap percakapan baru tanpa harus Anda ketik ulang setiap kali.
+Layanan *web chat* AI seperti ChatGPT dan Google Gemini menyediakan fitur *custom instructions* yang memungkinkan Anda menetapkan *role prompt* secara permanen. Instruksi tersebut akan otomatis disisipkan ke setiap percakapan baru tanpa harus Anda ketik ulang setiap kali.
 
-Berikut langkah-langkah memasang *role prompt* pada ChatGPT (antarmuka web):
+Sebagai contoh, berikut adalah langkah-langkah memasang *role prompt* pada ChatGPT:
 
 1. **Buka Pengaturan *Custom Instructions***: Klik ikon profil Anda pada sidebar kiri, kemudian pilih **Customize ChatGPT** (atau navigasi melalui **Settings → Personalization → Custom Instructions**).
 2. **Isi Kolom "What would you like ChatGPT to know about you?"**: Tuliskan informasi konteks tentang diri Anda yang relevan untuk pembelajaran.
@@ -96,15 +96,10 @@ Berikut langkah-langkah memasang *role prompt* pada ChatGPT (antarmuka web):
    * *Contoh*: "Bertindaklah sebagai asisten dosen (asdos) yang berdedikasi. Jika saya meminta solusi langsung untuk tugas pemrograman, tolak dan arahkan saya untuk berpikir tahap demi tahap. Berikan pertanyaan pemandu, bukan jawaban final. Gunakan Bahasa Indonesia." atau gunakan *role prompt* Burhan di atas pada [subbab 1.3](#13-contoh-role-prompt-burhan-asisten-dosen-pbp).
 4. **Simpan dan Aktifkan**: Klik tombol **Save**. Pastikan *toggle* *Custom Instructions* dalam keadaan aktif (ON). *Role prompt* kini akan diterapkan pada setiap percakapan baru.
 
-> Slop on
+!!! warning "Batas Jumlah Karakter"
+    Kolom *custom instructions* di ChatGPT memiliki [batas jumlah karakter sekitar 1.500 karakter](https://help.openai.com/en/articles/8096356-chatgpt-custom-instructions#is-there-a-character-limit-for-custom-instructions).
 
-!!! warning "Batas Karakter"
-    Setiap kolom *custom instructions* memiliki batas sekitar 1.500 karakter. Tuliskan instruksi secara ringkas dan padat — setiap kalimat harus memberikan dampak yang jelas pada perilaku AI.
-
-
-> **Catatan platform lain**: Google Gemini menyediakan fitur serupa melalui **Gemini Apps → Settings → System instructions** (tersedia pada versi tertentu). Antarmuka mungkin berbeda, tetapi prinsipnya sama: Anda menuliskan instruksi peran yang akan disisipkan ke setiap percakapan baru.
-
-> Slop off
+> **Catatan _platform_ lain**: Google Gemini menyediakan fitur serupa melalui fitur [Gems](https://gemini.google.com/gems/create) atau [Instructions for Gemini](https://gemini.google.com/saved-info). Dari uji coba penulis, kami menyarankan untuk menggunakan Gems daripada Instructions for Gemini karena *role prompt* selalu dimasukkan ketika pakai Gems. Instructions for Gemini tidak selalu menyertakannya berdasarkan pengujian penulis.
 
 ### 2.2 Memasang Role Prompt di Repositori Kode via AGENTS.md
 
@@ -130,7 +125,7 @@ Berkas `AGENTS.md` ditempatkan di direktori *root* yang kelak akan mengatur peri
 Anda tidak perlu membuat format instruksi baru dari awal. Anda cukup menyalin isi *role prompt* Burhan dari [subbab 1.3](#13-contoh-role-prompt-burhan-asisten-dosen-pbp) ke dalam berkas `AGENTS.md` di *root* repositori proyek Anda. Dengan menempatkan *role prompt* tersebut di `AGENTS.md`, seluruh *tools* AI yang bekerja pada *workspace* proyek Anda (seperti Copilot Chat di VS Code/JetBrains hingga *agent*/*harness* seperti Claude Code dan Antigravity) akan otomatis membaca instruksi tersebut dan bertindak sebagai Burhan yang membimbing anda seakan-akan seperti asisten dosen.
 
 !!! info "Standar Berkas Instruksi"
-    Selain `AGENTS.md`, beberapa *tools* seperti GitHub Copilot memiliki mekanisme tersendiri seperti berkas `.github/copilot-instructions.md`. Namun, menggunakan `AGENTS.md` sangat direkomendasikan karena berlaku di mayoritas *tools* AI yang dipasang pada IDE, *text editor*, dan *agent*/*harness*.
+    Selain `AGENTS.md`, beberapa *tools* seperti GitHub Copilot memiliki mekanisme tersendiri seperti berkas `.github/copilot-instructions.md`. Namun, penulis merekomendasikan `AGENTS.md` karena berlaku di mayoritas *tools* AI yang dipasang pada IDE, *text editor*, dan *agent*/*harness*.
 
 ## 3. Studi Kasus Hands-On: Burhan Membantu Debugging Django
 
@@ -248,7 +243,7 @@ Penggunaan AI dalam pengerjaan tugas di Fasilkom UI wajib disertai dengan transp
 
 ## 5. Referensi Dokumen Terkait
 
-* [Mengenal Chatbot AI](mengenal-chatbot-ai.md) — Konsep dasar LLM, antarmuka percakapan, dan penanganan halusinasi.
+* [Mengenal Chatbot AI](mengenal-chatbot-ai.md) — Konsep dasar model AI, antarmuka percakapan, dan penanganan halusinasi.
 * [Teknik Prompting Dasar](teknik-prompting.md) — Kerangka penyusunan prompt terstruktur (T-K-F-N).
 * [Panduan Praktis untuk DDP 1](panduan-praktis-ddp1.md) — Kebijakan penggunaan AI pada mata kuliah DDP 1.
 * [Panduan Praktis untuk PBP](panduan-praktis-pbp.md) — Kebijakan penggunaan AI pada mata kuliah PBP.
